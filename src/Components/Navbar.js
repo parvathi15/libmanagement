@@ -77,17 +77,17 @@ export default class Navbar extends Component {
             {this.state.role.username !== undefined ? (
             <ul className="navbar-nav mr-auto mainNav" style={this.state.sideBar ? { transform: "translateX(0)" } : null}>
              <li>
-               <Link to={{ pathname: "/userbook", state: this.state.role }}>
+               <Link to={{ pathname: "/libmanagement/userbook", state: this.state.role }}>
                     Userbooks
                     </Link>
                 </li>
                 <li className = "mt-3 mb-2">
-               <Link to={{ pathname: "/history", state: this.state.role }}>
+               <Link to={{ pathname: "/libmanagement/history", state: this.state.role }}>
                     BookRecords
                     </Link>
                 </li>
                 <li>
-                <Link to={{ pathname: "/profile", state: this.state.role }} className="mainNavLink">
+                <Link to={{ pathname: "/libmanagement/profile", state: this.state.role }} className="mainNavLink">
                     {this.state.user.username}
                     </Link>
                  
@@ -100,7 +100,7 @@ export default class Navbar extends Component {
   <div class="navbar-collapse collapse dual-nav order-4 order-md-4 justify-content-end">
     <ul className="mr-5" >
     <li class="nav-item">
-    <Link to="/" onClick={this.logout} className="mainNavLink" style = {{marginRight:"20px",textDecoration:"none",fontSize:"20px"}}>
+    <Link to="/libmanagement/" onClick={this.logout} className="mainNavLink" style = {{marginRight:"20px",textDecoration:"none",fontSize:"20px"}}>
        Logout
       </Link>
    </li>

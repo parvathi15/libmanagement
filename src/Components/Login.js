@@ -70,7 +70,7 @@ import books from "./img/books.png";
           } 
           if(this.state.email === "librarian@gmail.com" && this.state.password === "admin"){
             this.props.history.push({
-              pathname: '/admin' 
+              pathname: '/libmanagement/admin' 
             });
           } else if(this.state.email === "librarian@gmail.com" && this.state.password !== "admin")  {
             this.setState({errorMessage:"Invalid Librarian"})
@@ -115,7 +115,7 @@ import books from "./img/books.png";
                              </div>
                             <div class="register-path">
                             <p class="text-center">Not a member? 
-                            <Link to="/Register">
+                            <Link to="/libmanagement/Register">
                            <a className ="register">Register now</a> 
                            </Link>
                            </p>
