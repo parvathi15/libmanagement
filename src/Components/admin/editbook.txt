@@ -1,0 +1,264 @@
+import React, { Component } from 'react';
+import axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Button,Modal } from 'react-bootstrap';
+
+export default class EditBook extends Component {
+    constructor(props) {
+        super(props);
+         this.state = {
+         bookid: "",
+          title: "",
+          author:"",
+          subject: "",
+          date: new Date(),
+        };
+        this.onSubmit = this.onSubmit.bind(this);
+      }
+
+      setModalOpen = (e) => {
+        e.preventDefault();
+        this.setState(prevState => ({
+            showModal: !prevState.showModal 
+        }));
+        window.location = "/list";
+      }
+
+      componentDidMount() {
+        axios
+          .get("http://localhost:2500/books/" + this.props.match.params.id)
+          .then(response => {
+            this.setState({
+                bookid: response.data.bookid,
+                title: response.data.title,
+                author: response.data.author,
+                subject: response.data.subject,
+                date: new Date(response.data.date)
+            });
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+        }
+        onChangeBookId=e=> {
+            this.setState({
+              bookid: e.target.value
+            });
+          }
+        
+          onChangeName = e => {
+            this.setState({
+              title: e.target.value
+            });
+          }
+     
+          onChangeAuthor=(e)=> {
+            this.setState({
+              author: e.target.value
+            });
+          }
+          onChangeSubject=(e)=> {
+            this.setState({
+              subject: e.target.value
+            });
+          }
+          onChangeDate(date) {
+            this.setState({
+              date: date
+            });
+          }
+
+          onSubmit(e) {
+            e.preventDefault();
+        
+            const editbook = {
+              bookid: this.state.bookid,
+              title: this.state.title,
+              author: this.state.author,
+              subject: this.state.subject,
+              date: this.state.date,
+            
+            };
+        
+            console.log(editbook);
+        
+            axios
+              .post(
+                "http://localhost:2500/books/update/" + this.props.match.params.id,
+                editbook
+              )
+              .then(res => console.log(res.data));
+        
+            window.location = "/list";
+          }
+        
+    render() {
+        return (
+          <div className="modalBackground">
+           
+  <Modal.Dialog>
+  <Modal.Header closeButton onClick={this.setModalOpen}>
+  </Modal.Header>
+  <Modal.Body>
+            
+            <form onSubmit={this.onSubmit}>
+           
+            <div className="form-group">
+            <label className="ip_label">BookId: </label>
+            <input
+              type="text"
+              required
+              className="input"
+              value={this.state.bookid}
+             onChange={this.onChangeBookId}
+            />
+          </div>
+              <div className="form-group">
+                <label className="ip_label mt-3">Title: </label>
+                <input
+                  type="text"
+                  required
+                  className="input"
+                  value={this.state.title}
+                  onChange={this.onChangeName}
+                />
+              </div>
+              <div className="form-group">
+            <label className="ip_label mt-3">Author: </label>
+            <input
+              type="text"
+              required
+              className="input"
+              value={this.state.author}
+              onChange={this.onChangeAuthor}
+            />
+          </div>
+              <div className="form-group">
+            <label className="ip_label mt-3">Subject: </label>
+            <input
+              type="text"
+              required
+              className="input"
+              value={this.state.subject}
+              onChange={this.onChangeSubject}
+            />
+          </div>
+
+     
+          <div className="form-group">
+          <label className="ip_label mt-3">Date: </label>
+          <div>
+            <DatePicker
+              selected={this.state.date}
+              onChange={this.onChangeDate}
+              className="input"
+            />
+          </div>
+        </div>
+
+        <Modal.Footer>
+        <div className="form-group mt-3">
+            <input
+              type="submit"
+              value="Edit Book"
+              className="button-add mt-3"
+            />  
+                <button
+                onClick={this.setModalOpen}
+                className="btn btn-secondary">Cancel</button>
+              
+             
+            </div>
+            </Modal.Footer>
+        </form> 
+        </Modal.Body>
+        </Modal.Dialog>
+      </div>
+    
+        )
+    }
+}
+
+
+ //     <div className="modalBackground">
+      //     <div className="modalContainer">
+      //     <div className="titleCloseBtn">
+      //     <span onClick={this.setModalOpen} className="_hide-visual">
+      //     X
+      //       </span>
+    
+      //   </div>
+            
+      //       <form onSubmit={this.onSubmit}>
+      
+           
+      //       <div className="form-group">
+      //       <label className="ip_label">BookId: </label>
+      //       <input
+      //         type="text"
+      //         required
+      //         className="input"
+      //         value={this.state.bookid}
+      //        onChange={this.onChangeBookId}
+      //       />
+      //     </div>
+      //         <div className="form-group">
+      //           <label className="ip_label mt-3">Title: </label>
+      //           <input
+      //             type="text"
+      //             required
+      //             className="input"
+      //             value={this.state.title}
+      //             onChange={this.onChangeName}
+      //           />
+      //         </div>
+      //         <div className="form-group">
+      //       <label className="ip_label mt-3">Author: </label>
+      //       <input
+      //         type="text"
+      //         required
+      //         className="input"
+      //         value={this.state.author}
+      //         onChange={this.onChangeAuthor}
+      //       />
+      //     </div>
+      //         <div className="form-group">
+      //       <label className="ip_label mt-3">Subject: </label>
+      //       <input
+      //         type="text"
+      //         required
+      //         className="input"
+      //         value={this.state.subject}
+      //         onChange={this.onChangeSubject}
+      //       />
+      //     </div>
+
+     
+      //     <div className="form-group">
+      //     <label className="ip_label mt-3">Date: </label>
+      //     <div>
+      //       <DatePicker
+      //         selected={this.state.date}
+      //         onChange={this.onChangeDate}
+      //         className="input"
+      //       />
+      //     </div>
+      //   </div>
+
+
+      //   <div className="form-group mt-3">
+      //       <input
+      //         type="submit"
+      //         value="Edit Book"
+      //         className="button-add mt-3"
+      //       />  
+      //           <button
+      //           onClick={this.setModalOpen}
+      //           className="btn btn-secondary">Cancel</button>
+              
+             
+      //       </div>
+      //   </form> 
+      // </div>
+      // </div>

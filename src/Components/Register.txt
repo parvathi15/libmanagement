@@ -1,0 +1,110 @@
+import React, { Component } from 'react'
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Route , withRouter} from 'react-router-dom';
+
+
+
+ class Register extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+          username: "",
+          email:"",
+            password:"",
+            reEnterPassword: "",
+            userlist:[],
+            status: 'pending'
+          };
+          
+      }
+
+      onChangeName = e => {
+        this.setState({
+          username: e.target.value
+        });
+      };
+
+      onChangeStatus(e) {
+        this.setState({
+          status: 'pending'
+        });
+      }
+    
+      onChangeEmail = e => {
+        this.setState({
+          email: e.target.value
+        });
+      };
+    
+      onChangePassword = e => {
+        this.setState({
+          password: e.target.value
+        });
+      };
+      onChangeEnterPassword = e => {
+        this.setState({
+            reEnterPassword: e.target.value
+        });
+      };
+
+      register = () => {
+        let userlist = this.state.userlist;
+        const member = {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+          status: this.state.status
+          };
+         if( this.state.username && this.state.email && this.state.password 
+          && this.state.status && (this.state.password === this.state.reEnterPassword)){
+          axios
+          .post("http://localhost:2500/members/add", member)
+          .then(res => console.log(res.data));  
+          // window.location = "/"; 
+          this.props.history.push("/");
+        } else {
+            alert("invlid input")
+        }
+      }
+
+
+    render() {
+        return (
+            <div class="login_wrapper">
+            <form class="register_box" onSubmit={this.register}>
+                   <div class="login_header">Register</div>
+                    <div class="register_content">
+                    <div class="ip_container userType">
+                            <label class="ip_label">Username</label>
+                            <input placeholder="Name" class="input" name="email" type="text" value={this.state.username} onChange={this.onChangeName}/>
+                            </div>
+                        <div class="ip_container userType">
+                            <label class="ip_label">Email</label>
+                            <input placeholder="name@email.com" class="input" name="email" type="text" value={this.state.email} onChange={ this.onChangeEmail } />
+                            </div>
+                            <div class="ip_container userType">
+                            <label class="ip_label">Password</label>
+                            <input placeholder="Password" class="input" name="password" type="password" value={this.state.password} onChange={this.onChangePassword}/>
+                            </div>
+                            <div class="ip_container userType">
+                            <label class="ip_label">Re-enter Password</label>
+                            <input placeholder="Re-enter Password" class="input" name="password" type="password" value={this.state.reEnterPassword} onChange={this.onChangeEnterPassword} />
+                            </div>
+                            </div>
+                            <div class="login_footer">
+                            <input type="submit"  value="Register" className="submitBtn button mt-4 mb-3" />
+                                {/* <button type="submit" class="submitBtn button_primary button mt-4 mb-3">Register</button> */}
+                                </div>
+                            <div class="register-path mb-3">
+                            <Link to="/">
+                           <a className ="register">Go Back</a> 
+                           </Link>
+                            </div>
+                            </form>
+                            </div>
+        )
+    }
+}
+
+export default withRouter(Register);

@@ -1,0 +1,26 @@
+import React, { Component } from 'react'
+
+export default class Difference extends Component {
+    constructor(props) {
+        super(props);
+    }
+    calculate(e) {
+        e.preventDefault();
+       
+         let prescriptionDate= new Date()  // Today
+      const days = 7
+       let date = new Date(new Date(prescriptionDate).setDate(prescriptionDate.getDate() + days)).toDateString();
+      
+      console.log(date);
+    }
+
+    render() {
+        return (
+            <div>
+                <form class="login_box" onSubmit={this.calculate}>
+               <button>calculate</button> 
+               </form>
+            </div>
+        )
+    }
+}

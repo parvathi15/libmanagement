@@ -1,0 +1,16 @@
+https://stackoverflow.com/questions/57655861/prevent-browser-back-button-for-a-specific-page-only-in-react
+https://stackoverflow.com/questions/55966533/show-alert-on-browser-back-button-event-on-react-js
+https://stackoverflow.com/questions/37878142/browser-back-button-using-react/60984563#60984563
+https://stackoverflow.com/questions/39342195/intercept-handle-browsers-back-button-in-react-router
+
+https://www.youtube.com/watch?v=7xt9VGWP2Qw(Initialize Git Repository From Visual Studio Code | Github | VS Code Tutorial (2021) [#8])
+https://www.youtube.com/watch?v=lUEtzFsicJY&lc=z23yijtqkreefxljr04t1aokgcpxjujfaqaytmqffb45rk0h00410
+https://www.youtube.com/watch?v=tA4Fl1dZgjc
+
+
+least important
+https://www.youtube.com/watch?v=c4_xPM7zSAY
+https://www.youtube.com/watch?v=CzsuPVc4Pss
+
+mongodb+srv://parvathi_admin:calgar15@cluster0.jpcif.mongodb.net/projects?retryWrites=true&w=majority
+mongodb+srv://parvathi_admin:calgar15@cluster0.jpcif.mongodb.net/projects?retryWrites=true&w=majority
