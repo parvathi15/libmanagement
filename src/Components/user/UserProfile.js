@@ -131,7 +131,7 @@ export default class UserProfile extends Component {
         if(this.state.password === this.state.reEnterPassword){
         axios
           .post(
-            "http://localhost:3500/members/update/" + this.props.location.state._id,
+            "https://library-api123.herokuapp.com/members/update/" + this.props.location.state._id,
             editMember
           )
           .then(res => 

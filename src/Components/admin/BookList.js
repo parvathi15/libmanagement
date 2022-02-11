@@ -36,7 +36,7 @@ class BookList extends Component {
 
       componentDidMount() {
         axios
-          .get("http://localhost:3500/books/listedbooks")
+          .get("https://library-api123.herokuapp.com/books/listedbooks")
           .then(response => {
             this.setState({ books: response.data });
             console.log(this.state.books)
@@ -48,7 +48,7 @@ class BookList extends Component {
 
       deleteBook(id) {
         console.log(id);
-        axios.delete("http://localhost:3500/books/" + id).then(response => {
+        axios.delete("https://library-api123.herokuapp.com/books/" + id).then(response => {
           console.log(response.data);
         });
     

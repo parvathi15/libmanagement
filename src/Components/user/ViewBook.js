@@ -130,7 +130,7 @@ export default class Viewbook extends Component {
              console.log(res)
             );
       
-           window.location = "/userbook";
+           window.location = "/libmanagement/userbook";
           // console.log(res)
           // this.setState({errorMessage:res.data.message})
         }

@@ -45,7 +45,7 @@ var moment = require('moment');
 
       deleteBook(id) {
         console.log(id);
-        axios.delete("http://localhost:3500/requests/" + id).then(response => {
+        axios.delete("https://library-api123.herokuapp.com/requests/" + id).then(response => {
           console.log(response.data);
         });
     
@@ -89,7 +89,7 @@ var moment = require('moment');
         console.log(returnbook);
         axios
         .post(
-          "http://localhost:3500/requests/update/" + book._id,
+          "https://library-api123.herokuapp.com/requests/update/" + book._id,
           returnbook
         )
         .then(res => console.log(res.data)
@@ -104,7 +104,7 @@ var moment = require('moment');
           user:token.username
         })
         axios
-          .get(`http://localhost:3500/requests/user/${reader}`)
+          .get(`https://library-api123.herokuapp.com/requests/user/${reader}`)
           .then(response => {
             console.log(response)
             this.setState({ bookreq: response.data });
