@@ -37,7 +37,7 @@ export default class App extends Component {
       <Router>
 
 <Switch>
-  <Route exact path="/libmanagement" component={Login} />
+  <Route exact path="/libmanagement/" component={Login} />
   <Route exact path="/libmanagement/Register" component={Register} />
   <div>
     <Navbar />
