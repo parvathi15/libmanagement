@@ -20,7 +20,7 @@ export default class Adminpage extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:3500/members/")
+      .get("https://library-api123.herokuapp.com/members/")
       .then(response => {
         this.setState({ users: response.data });
         console.log(this.state.users)
@@ -53,7 +53,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link to= {{
-              pathname:'/userreqs',
+              pathname:'/libmanagement/userreqs',
             }}>
             Member Requests
             </Link>
@@ -67,7 +67,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
-              pathname:'/records',
+              pathname:'/libmanagement/records',
             }}>
             Book Requests
             </Link>
@@ -83,7 +83,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
-              pathname:'/addbook',
+              pathname:'/libmanagement/addbook',
             }}>
              Add Book 
             </Link>
@@ -97,7 +97,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
-              pathname:'/return',
+              pathname:'/libmanagement/return',
             }}>
             Return Books
             </Link>
@@ -111,7 +111,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
-              pathname:'/list',
+              pathname:'/libmanagement/list',
             }}>
             List of Books
             </Link>

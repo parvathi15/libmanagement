@@ -69,7 +69,7 @@ class HomePage extends Component {
             user: token.username
         });
         axios
-          .get("http://localhost:3500/books/listedbooks")
+          .get("https://library-api123.herokuapp.com/books/listedbooks")
           .then(response => {
             this.setState({ availablebooks: response.data });
             console.log(this.state.availablebooks);
@@ -79,7 +79,7 @@ class HomePage extends Component {
           });
 
           axios
-          .get(`http://localhost:3500/requests/user/${username}/Reading`)
+          .get(`https://library-api123.herokuapp.com/requests/user/${username}/Reading`)
           .then(response => {
             this.setState({ books_taken: response.data.length
             });
@@ -121,7 +121,7 @@ class HomePage extends Component {
         console.log(this.state.due_date);
         const todayDate = Moment(new Date()).format('MM-DD-YYYY');
         const username = this.props.location.state.user.username;
-    const url = `http://localhost:3500/books/sachu/${number}`;
+    const url = `https://library-api123.herokuapp.com/sachu/${number}`;
             const api_call = await fetch(url)
             const data = await api_call.json();
           
@@ -141,7 +141,7 @@ class HomePage extends Component {
             console.log(bookrecord)
             if(this.state.books_taken < 1 && this.state.bookrecord.length < 1 && count > 0) {
               axios
-              .post("http://localhost:3500/requests/add", bookrecord)
+              .post("https://library-api123.herokuapp.com/requests/add", bookrecord)
               .then(res => 
               this.setState({ message: res.data.message }),
               this.setState({ bookrecord: [...this.state.bookrecord, bookrecord] }),
