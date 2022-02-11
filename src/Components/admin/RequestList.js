@@ -115,7 +115,7 @@ return (
 <td>{currentmember.createdAt.substring(0, 10)}</td>
 <td>
 
-    <Link to={"/edituser/" + currentmember._id}><i className="fa fa-edit"></i></Link> |{" "}
+    <Link to={"/libmanagement/edituser/" + currentmember._id}><i className="fa fa-edit"></i></Link> |{" "}
   
     <a
         onClick={() => {
