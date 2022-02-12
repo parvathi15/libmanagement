@@ -211,7 +211,7 @@ class Register extends Component {
                              
         </div>
        <div class="register-path mb-3">
-         <Link to="/libmanagement">
+         <Link to="/libmanagement/">
         <a className ="register">Go Back</a> 
         </Link>
                             

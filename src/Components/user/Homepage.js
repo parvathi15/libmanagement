@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { confirmAlert } from 'react-confirm-alert';
 import { Route , withRouter} from 'react-router-dom';
-
 import Moment from 'moment';
 import { Link } from "react-router-dom";
 
@@ -69,7 +68,7 @@ class HomePage extends Component {
             user: token.username
         });
         axios
-          .get("https://library-api123.herokuapp.com/books/listedbooks")
+          .get("https://library-api123.herokuapp.com/books/sachu")
           .then(response => {
             this.setState({ availablebooks: response.data });
             console.log(this.state.availablebooks);
@@ -269,58 +268,3 @@ class HomePage extends Component {
 
 export default withRouter(HomePage)
 
-    // window.addEventListener('popstate', (event) => {
-        //   alert("You message");
-        // });
-        // const { match } = this.props;
-        // if(match.url === "/homepage"){
-        //   window.history.pushState(null, document.title, window.location.href);
-        //   window.addEventListener('popstate', function (event){
-        //      window.history.pushState(null, document.title,  window.location.href);
-        //   });
-        // }      
-        // window.addEventListener("popstate", () => {
-        //   this.props.history.go(1);
-        // });
-
-
-      //   handleOnClick= async (number) => {
-      //     console.log(this.state.books_taken);
-      //     console.log(this.state.fine);
-      //     this.setState({ display: "block" });
-      //     const username = this.props.location.state.user.username;
-      // const url = `http://localhost:2500/books/`+number;
-      //         const api_call = await fetch(url);
-      //         const data = await api_call.json();
-      //              const bookrecord = {
-      //             bookid: data.bookid,
-      //             title: data.title,
-      //             subject:data.subject,
-      //             author:data.author,
-      //             date: data.createdAt,
-      //             user:this.props.location.state.user.username,
-      //             status: this.state.status,
-      //             copies: data.copies,
-      //             returnstatus:this.state.returnstatus,
-      //             issue_date:this.state.issue_date,
-      //             due_date:this.state.due_date
-      //           };
-      //           console.log(this.state.books_taken)
-      //           console.log(this.state.bookrecord.length)
-      //        if(this.state.books_taken < 2 && this.state.bookrecord.length < 1) {
-      //         axios
-      //         .post("http://localhost:2500/requests/add", bookrecord)
-      //         .then(res => 
-      //         this.setState({ message: res.data.message }),
-      //         this.setState({ bookrecord: [...this.state.bookrecord, bookrecord] }),
-      //         console.log(this.state.bookrecord.length)
-      //         ).catch(err=>{
-      //           this.setState({ message: err })
-      //         })
-      //        } else if (this.state.books_taken >0){
-      //         this.setState({ message: "You have to return the books befire requesting new book" })
-      //       } else {
-      //         this.setState({ message: "Your request for books has exceeded the limit" })
-      //       }
-      //         this.vanishMessage()
-      //     }
