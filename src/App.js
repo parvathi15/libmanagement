@@ -23,7 +23,7 @@ import Editform from "./Components/modals/Editform";
 import demoform from "./Components/admin/demoform";
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, HashRouter } from 'react-router-dom';
 // import Viewbook from './Components/user/Viewbook';
 
 export default class App extends Component {
@@ -36,7 +36,7 @@ export default class App extends Component {
       <div className='App'>
       <Router>
 
-<Switch>
+<HashRouter>
   <Route exact path="/libmanagement/" component={Login} />
   <Route exact path="/libmanagement/Register" component={Register} />
   <div>
@@ -60,7 +60,7 @@ export default class App extends Component {
     <Route path="/libmanagement/editreturn/:id" component={EditBookReturn} />
     <Route path="/libmanagement/viewbook/:id" component={ViewBook} />
     </div>
-    </Switch>
+    </HashRouter>
   </Router>
   </div>
     )
