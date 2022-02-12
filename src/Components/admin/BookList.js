@@ -124,7 +124,7 @@ class BookList extends Component {
 <td>{Moment(book.date).format('DD MMM YYYY')}</td>
 <td>
 
-      <Link to={"/editbook/" + book._id}><i className="fa fa-edit" onClick={()=>{this.handleModal()}}></i></Link> |{" "}
+      <Link to={"/libmanagement//editbook/" + book._id}><i className="fa fa-edit" onClick={()=>{this.handleModal()}}></i></Link> |{" "}
       {/* <Link><i className="fa fa-edit" onClick={()=>{this.handleModal()}}></i></Link> |{" "} */}
       <a
         onClick={() => {

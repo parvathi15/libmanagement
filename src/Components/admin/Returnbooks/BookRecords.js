@@ -156,7 +156,7 @@ class BookRecords extends Component {
 <td>{dueTime}</td>
 <td>{req.status}</td>
 {dueTime < todayDateFormat?(
-   <td><Link to={"/fine/" + req._id}>
+   <td><Link to={"/libmanagement/fine/" + req._id}>
    <button type="button" class="btn btn-warning">Add Fine</button>
    </Link>
    </td> 
