@@ -36,7 +36,7 @@ class BookList extends Component {
 
       componentDidMount() {
         axios
-          .get("https://library-api123.herokuapp.com/books/listedbooks")
+          .get("https://library-api123.herokuapp.com/books/sachu")
           .then(response => {
             this.setState({ books: response.data });
             console.log(this.state.books)

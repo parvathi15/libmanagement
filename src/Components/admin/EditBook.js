@@ -30,7 +30,7 @@ export default class EditBook extends Component {
         this.setState(prevState => ({
             showModal: !prevState.showModal 
         }));
-        window.location = "/list";
+        window.location = "/libmanagement/list";
       }
 
       // handleValidation(){
