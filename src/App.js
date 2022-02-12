@@ -36,7 +36,7 @@ export default class App extends Component {
       <div className='App'>
       <Router>
 
-<HashRouter>
+<Switch>
   <Route exact path="/libmanagement/" component={Login} />
   <Route exact path="/libmanagement/Register" component={Register} />
   <div>
@@ -60,7 +60,7 @@ export default class App extends Component {
     <Route path="/libmanagement/editreturn/:id" component={EditBookReturn} />
     <Route path="/libmanagement/viewbook/:id" component={ViewBook} />
     </div>
-    </HashRouter>
+    </Switch >
   </Router>
   </div>
     )
