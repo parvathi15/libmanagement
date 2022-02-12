@@ -120,7 +120,7 @@ class HomePage extends Component {
         console.log(this.state.due_date);
         const todayDate = Moment(new Date()).format('MM-DD-YYYY');
         const username = this.props.location.state.user.username;
-    const url = `https://library-api123.herokuapp.com/sachu/${number}`;
+    const url = `https://library-api123.herokuapp.com/books/sachu/${number}`;
             const api_call = await fetch(url)
             const data = await api_call.json();
           
