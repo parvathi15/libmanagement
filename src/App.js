@@ -34,21 +34,21 @@ export default class App extends Component {
   render() {
     return (
       <div className='App'>
-      <Router>
+      <Router basename='/libmanagement'>
 
 <Switch>
-  <Route exact path="/libmanagement/" component={Login} />
-  <Route exact path="/libmanagement/Register" component={Register} />
+  <Route exact path="/" component={Login} />
+  <Route exact path="/Register" component={Register} />
   <div>
     <Navbar />
-    <Route path="/libmanagement/homepage" component={HomePage} />
-    <Route exact path="/libmanagement/userbook" component={Userbooks} />
-    <Route exact path="/libmanagement/addbook" component={AddBook} /> 
-    <Route path="/libmanagement/history" component={BookHistory} /> 
-    <Route exact path="/libmanagement/editbook/:id" component={EditBook} />
-    <Route exact path="/libmanagement/list" component={BookList} />
-    <Route path="/libmanagement/records" component={Bookrequests} />
-    <Route exact path="/libmanagement/admin" component={Adminpage} />
+    <Route path="/homepage" component={HomePage} />
+    <Route exact path="/userbook" component={Userbooks} />
+    <Route exact path="/addbook" component={AddBook} /> 
+    <Route path="/history" component={BookHistory} /> 
+    <Route exact path="/editbook/:id" component={EditBook} />
+    <Route exact path="/list" component={BookList} />
+    <Route path="/records" component={Bookrequests} />
+    <Route exact path="/admin" component={Adminpage} />
     <Route path="/libmanagement/userreqs" component={RequestList} />
     <Route path="/libmanagement/edituser/:id" component={EditRequest} />
     <Route path="/libmanagement/editbkre/:id" component={EditBookReq} />
