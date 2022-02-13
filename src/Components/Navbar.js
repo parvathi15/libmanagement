@@ -100,7 +100,7 @@ export default class Navbar extends Component {
   <div class="navbar-collapse collapse dual-nav order-4 order-md-4 justify-content-end">
     <ul className="mr-5" >
     <li class="nav-item">
-    <Link to="/libmanagement/" onClick={this.logout} className="mainNavLink" style = {{marginRight:"20px",textDecoration:"none",fontSize:"20px"}}>
+    <Link to="/libmanagement" onClick={this.logout} className="mainNavLink" style = {{marginRight:"20px",textDecoration:"none",fontSize:"20px"}}>
        Logout
       </Link>
    </li>
