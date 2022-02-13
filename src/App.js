@@ -49,16 +49,16 @@ export default class App extends Component {
     <Route exact path="/list" component={BookList} />
     <Route path="/records" component={Bookrequests} />
     <Route exact path="/admin" component={Adminpage} />
-    <Route path="/libmanagement/userreqs" component={RequestList} />
-    <Route path="/libmanagement/edituser/:id" component={EditRequest} />
-    <Route path="/libmanagement/editbkre/:id" component={EditBookReq} />
-    <Route path="/libmanagement/diff" component={Difference} />
-    <Route path="/libmanagement/modal" component={Editform} />
-    <Route path="/libmanagement/fine/:id" component={ImpFine} />
-    <Route path="/libmanagement/return" component={BookRecords} />
-    <Route path="/libmanagement/profile" component={UserProfile} />
-    <Route path="/libmanagement/editreturn/:id" component={EditBookReturn} />
-    <Route path="/libmanagement/viewbook/:id" component={ViewBook} />
+    <Route path="/userreqs" component={RequestList} />
+    <Route path="/edituser/:id" component={EditRequest} />
+    <Route path="/editbkre/:id" component={EditBookReq} />
+    <Route path="/diff" component={Difference} />
+    <Route path="/modal" component={Editform} />
+    <Route path="/fine/:id" component={ImpFine} />
+    <Route path="/return" component={BookRecords} />
+    <Route path="/profile" component={UserProfile} />
+    <Route path="/editreturn/:id" component={EditBookReturn} />
+    <Route path="/viewbook/:id" component={ViewBook} />
     </div>
     </Switch >
   </Router>

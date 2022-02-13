@@ -62,7 +62,7 @@ import books from "./img/books.png";
           if (res.data.message === "Login Successfull") {
             localStorage.setItem("MyUser", JSON.stringify(res.data.user))
           this.props.history.push({
-          pathname: '/libmanagement/homepage',
+          pathname: '/homepage',
           state: {
              user: res.data.user
           } 
@@ -70,7 +70,7 @@ import books from "./img/books.png";
           } 
           if(this.state.email === "librarian@gmail.com" && this.state.password === "admin"){
             this.props.history.push({
-              pathname: '/libmanagement/admin' 
+              pathname: '/admin' 
             });
           } else if(this.state.email === "librarian@gmail.com" && this.state.password !== "admin")  {
             this.setState({errorMessage:"Invalid Librarian"})
@@ -115,7 +115,7 @@ import books from "./img/books.png";
                              </div>
                             <div class="register-path">
                             <p class="text-center">Not a member? 
-                            <Link to="/libmanagement/Register">
+                            <Link to="/Register">
                            <a className ="register">Register now vhjbv</a> 
                            </Link>
                            </p>
