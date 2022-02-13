@@ -29,7 +29,7 @@ export default class EditRequest extends Component {
     this.setState(prevState => ({
         showModal: !prevState.showModal 
     }));
-    window.location = "/userreqs";
+    window.location = "/libmanagement/userreqs";
   }
 
   componentDidMount() {
