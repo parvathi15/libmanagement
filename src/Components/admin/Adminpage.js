@@ -53,7 +53,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link to= {{
-              pathname:'/libmanagement/userreqs',
+              pathname:'/userreqs',
             }}>
             Member Requests
             </Link>
@@ -67,7 +67,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
-              pathname:'/libmanagement/records',
+              pathname:'/records',
             }}>
             Book Requests
             </Link>
@@ -83,7 +83,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
-              pathname:'/libmanagement/addbook',
+              pathname:'/addbook',
             }}>
              Add Book 
             </Link>
@@ -97,7 +97,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
-              pathname:'/libmanagement/return',
+              pathname:'/return',
             }}>
             Return Books
             </Link>
@@ -111,7 +111,7 @@ export default class Adminpage extends Component {
             </div>
             <p>
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
-              pathname:'/libmanagement/list',
+              pathname:'/list',
             }}>
             List of Books
             </Link>
