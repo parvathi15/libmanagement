@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from "./Components/Navbar";
 import Login from "./Components/Login";
-import HomePage from "./Components/user/Homepage";
+import Homepage from "./Components/user/Homepage";
 import ViewBook from "./Components/user/ViewBook";
 import Userbooks from "./Components/user/Userbooks";
 import UserProfile from "./Components/user/UserProfile";
@@ -41,7 +41,7 @@ export default class App extends Component {
   <Route exact path="/Register" component={Register} />
   <div>
     <Navbar />
-    <Route path="/homepage" component={HomePage} />
+    <Route path="/homepage" component={Homepage} />
     <Route exact path="/userbook" component={Userbooks} />
     <Route exact path="/addbook" component={AddBook} /> 
     <Route path="/history" component={BookHistory} /> 
