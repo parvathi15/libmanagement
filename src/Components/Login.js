@@ -116,7 +116,7 @@ import books from "./img/books.png";
                             <div class="register-path">
                             <p class="text-center">Not a member? 
                             <Link to="/Register">
-                           <a className ="register">Register now vhjbv</a> 
+                           <a className ="register">Register now</a> 
                            </Link>
                            </p>
                             </div>
