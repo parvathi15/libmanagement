@@ -180,7 +180,7 @@ export default class EditBook extends Component {
               )
               .then(res => console.log(res.data));
         
-            window.location = "/list";
+            window.location = "/libmanagement/list";
           }
         }
         
