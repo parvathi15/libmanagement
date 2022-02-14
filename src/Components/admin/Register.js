@@ -104,7 +104,10 @@ class Register extends Component {
        } else if (!(lastAtPos < lastDotPos && lastAtPos > 0 && this.state.email.indexOf('@@') === -1 && lastDotPos > 2 && (this.state.email.length - lastDotPos) > 2)) {
              formIsValid = false;
              errors["email"] = "Email is not valid";
-           }
+           } else if (this.state.email.indexOf(' ') >= 0) {
+            formIsValid = false;
+            errors["email"] = "Please avoid spaces";
+          }
        else {
         formIsValid = false;
         // errors["password"] = " Please fill properly";
