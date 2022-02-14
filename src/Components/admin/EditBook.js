@@ -157,7 +157,7 @@ export default class EditBook extends Component {
             // }
 
             const regid = /^[0-9]+$/;
-        const alphaRegex = /^[a-zA-Z]+$/;
+            const alphaRegex = /^[a-zA-Z ]*$/;
             const editbook = {
               bookid: this.state.bookid,
               title: this.state.title,

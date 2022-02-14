@@ -154,7 +154,7 @@ class Register extends Component {
     };
     if( this.state.username && this.state.email && this.state.password 
       && this.state.status && (this.state.password === this.state.reEnterPassword)
-      && (regex.test(this.state.email) === true) && (passwordRegex.test(this.state.password) === true) && (this.state.password.length > 3)
+      && (regex.test(this.state.email) === true) && (passwordRegex.test(this.state.password) === true) && (this.state.password.length > 6)
       && (usernameRegex.test(this.state.username) === true)){
       axios
       .post("https://library-api123.herokuapp.com/members/add", member)
