@@ -159,7 +159,7 @@ class Register extends Component {
       .catch(err=>{
         this.setState({ reg_message: err })
       })
-      window.location = "/";
+      window.location = "/libmanagement";
       this.vanishMessage()
     } else if(this.state.username === "" || this.state.email === "" || this.state.password === "" || this.state.reEnterPassword === "") {
       this.setState({ errorMessage: "Please Fill the fields" })
