@@ -62,7 +62,7 @@ import books from "./img/books.png";
           if (res.data.message === "Login Successfull") {
             localStorage.setItem("MyUser", JSON.stringify(res.data.user))
           this.props.history.push({
-          pathname: '/libmanagement/homepage',
+          pathname: '/homepage',
           state: {
              user: res.data.user
           } 
