@@ -69,21 +69,21 @@ router.route("/:id").delete((req, res) => {
 });
 
 router.route("/update/:id").post((req, res) => {
-    Member.findById(req.params.id)
-    .then(member => {
-        member.username = req.body.username;
-        member.status = req.body.status;
-        member.email = req.body.email;
-        member.date = req.body.date;
-        member.password = req.body.password;
-        member.fine = Number(req.body.fine);
+  Member.findById(req.params.id)
+  .then(member => {
+      member.username = req.body.username;
+      member.status = req.body.status;
+      member.email = req.body.email;
+      member.date = req.body.date;
+      member.password = req.body.password;
+      member.fine = Number(req.body.fine);
 
-        member
-        .save()
-        .then(() => res.json("Member updated!"))
-        .catch(err => res.status(400).json("Error: " + err));
-    })
-    .catch(err => res.status(400).json("Error: " + err));
+      member
+      .save()
+      .then(() => res.json("Member updated!"))
+      .catch(err => res.status(400).json("Error: " + err));
+  })
+  .catch(err => res.status(400).json("Error: " + err));
 });
 
 router.route("/status/:param").get((req, res) => {

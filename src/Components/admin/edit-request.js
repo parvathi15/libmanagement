@@ -19,6 +19,7 @@ export default class EditRequest extends Component {
       status: "",
       email: "",
       date: new Date(),
+      password:"",
       users: [],
       fine:0
     };
@@ -29,7 +30,7 @@ export default class EditRequest extends Component {
     this.setState(prevState => ({
         showModal: !prevState.showModal 
     }));
-    window.location = "/libmanagement/userreqs";
+    window.location = "/userreqs";
   }
 
   componentDidMount() {
@@ -40,7 +41,7 @@ export default class EditRequest extends Component {
           username: response.data.username,
           status: response.data.status,
           email: response.data.email,
-        
+          password:response.data.password
         });
       })
       .catch(function(error) {
@@ -85,11 +86,13 @@ export default class EditRequest extends Component {
     });
   }
 
+  
   onSubmit(e) {
     e.preventDefault();
 
     const member = {
       username: this.state.username,
+      password: this.state.password,
       status: this.state.status,
       email: this.state.email,
       date: this.state.date,
