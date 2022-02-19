@@ -53,6 +53,10 @@ import Moment from 'moment';
             return (
          <div>
        <div className = "container mt-5">
+       {this.state.bookrecords.length === 0 ? (
+      <h3 style = {{color: "#3b2341"}} className='mt-3'>No Issued Books</h3> 
+      ):(
+        <div>
          <form method="POST" action="#" class="mt-5">
            <div class="row mt-5">
              <div class="col-md-8 mt-1" style={{ margin: "0 auto" }}>
@@ -113,6 +117,8 @@ import Moment from 'moment';
     })}
     </tbody>
     </table>
+    </div>
+ )} 
      </div>
      </div>
             )

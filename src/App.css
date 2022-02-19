@@ -283,10 +283,10 @@ login */
   display: flex;
   justify-content: center;
   height: 100vh;
-  background-color: #f8f9fd;
-  background-image: linear-gradient(
+  background-color: #f9f9f9;
+  /* background-image: linear-gradient(
 90deg
-,#fff,#fff 20%,#f7f8fa);
+,#fff,#fff 20%,#f7f8fa); */
 }
 
 .login_box {
@@ -303,7 +303,7 @@ login */
 }
 
 .register_box {
-  max-width: 460px;
+  /* max-width: 460px; */
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -759,6 +759,269 @@ h3 {
     text-align:left;
     font-weight:bold;
 }
+
+table{
+  font-family: sans-serif;
+  border-collapse: collapse;
+  font-size: 15px !important;
+}
+
+table th{
+  background-color: #333;
+  color: black;
+}
+
+th, td{
+  padding: .8rem;
+  font-size: 1.1rem;
+}
+
+tbody{
+  background-color: white;
+  color: black;
+}
+
+
+@media (min-width: 400px) {
+.login_box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 200px auto;
+  width: 350px !important;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 21px !important;
+  box-shadow: 0 0 1px rgb(67 90 111 / 80%), 0 2px 4px -2px rgb(67 90 111 / 50%);
+}
+.register_box {
+  /* max-width: 460px; */
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 100px auto;
+  width: 350px !important;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px !important;
+  box-shadow: 0 0 1px rgb(67 90 111 / 80%), 0 2px 4px -2px rgb(67 90 111 / 50%);
+}
+}
+
+@media (max-width: 400px) {
+  .login_box {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 200px auto;
+    width: 360px !important;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 21px !important;
+    box-shadow: 0 0 1px rgb(67 90 111 / 80%), 0 2px 4px -2px rgb(67 90 111 / 50%);
+  }
+
+  .rightnav .logoutadminlink a {
+    display:block !important;
+    color:white !important;
+  }
+  /* .register_box {
+     max-width: 460px; 
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 100px auto;
+    width: 350px !important;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 21px !important;
+    box-shadow: 0 0 1px rgb(67 90 111 / 80%), 0 2px 4px -2px rgb(67 90 111 / 50%);
+  } */
+}
+
+
+
+
+@media screen and (max-width: 375px){
+  
+  .mainNav .logoutlink {
+    display: block !important;
+    padding: 0.71875rem 0;
+    text-transform: capitalize;
+    cursor: grab;
+    color: white;
+    text-decoration: none !important;
+  }
+
+}
+
+
+
+@media screen and (max-width: 575px){
+  
+  .mainNav .logoutlink {
+    display: block;
+    padding: 0.71875rem 0;
+    text-transform: capitalize;
+    cursor: grab;
+    color: white;
+    text-decoration: none !important;
+  }
+
+  /* .rightnav .logoutadminlink a {
+    display:none !important;
+    color:white !important;
+  } */
+
+}
+
+@media screen and (min-width: 576px){
+  
+  .mainNav .logoutlink {
+    display: none;
+    padding: 0.71875rem 0;
+    text-transform: capitalize;
+    cursor: grab;
+    color: white;
+    text-decoration: none !important;
+  }
+  .login_box {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 200px auto;
+    width: 460px !important;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px !important;
+    box-shadow: 0 0 1px rgb(67 90 111 / 80%), 0 2px 4px -2px rgb(67 90 111 / 50%);
+}
+.register_box {
+ 
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 100px auto;
+  width: 460px !important;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px !important;
+  box-shadow: 0 0 1px rgb(67 90 111 / 80%), 0 2px 4px -2px rgb(67 90 111 / 50%);
+}
+
+.rightnav .logoutadminlink {
+  display:none !important;
+}
+}
+
+@media (min-width: 768px) {
+.quiz-topic {
+  margin: 15px !important;
+  width: 205px !important;
+  height: 210px;
+  border: 0.5px solid #e7dfdf;
+  background: rgb(228, 220, 231);
+  border-radius: 5px;
+  text-align: center;
+}
+}
+
+@media screen and (min-width: 992px){
+.quiz-topic {
+  margin: 15px !important;
+  width: 320px !important;
+  height: 210px;
+  border: 0.5px solid #e7dfdf;
+  background: rgb(228, 220, 231);
+  border-radius: 5px;
+  text-align: center;
+}
+}
+
+@media screen and (max-width: 992px){
+  /* .mainNav .logoutlink {
+    display: none;
+   
+  } */
+
+  .quiz-topic {
+    margin: 15px !important;
+    width: 320px !important;
+    height: 210px;
+    border: 0.5px solid #e7dfdf;
+    background: rgb(228, 220, 231);
+    border-radius: 5px;
+    text-align: center;
+}
+
+  thead{
+    display: none;
+  }
+
+  td{
+    display: block;
+  }
+
+  /* td:first-child{
+    color: black;
+    text-align: center;
+  } */
+  td:nth-child(1)::before{
+    content: "Book No";
+  }
+ 
+  td:nth-child(2)::before{
+    content: "Name";
+  }
+
+  td:nth-child(3)::before{
+    content: "Author";
+  }
+
+  td:nth-child(4)::before{
+    content: "Subject";
+  }
+  td:nth-child(5)::before{
+    content: "Copies";
+  }
+  td:nth-child(6)::before{
+    content: "Published Date";
+  }
+  td:nth-child(7)::before{
+    content: "Actions";
+  }
+  td:nth-child(8)::before{
+    content: "Actions";
+  }
+
+  td{
+    text-align: right;
+  }
+
+  td::before{
+    float: left;
+    margin-right: 3rem;
+    font-weight: bold;
+  }
+}
+
+/* @media (min-width: 1280px) {
+  .quiz-topic {
+    margin: 15px !important;
+    width: 320px !important;
+    height: 210px;
+    border: 0.5px solid #e7dfdf;
+    background: rgb(228, 220, 231);
+    border-radius: 5px;
+    text-align: center;
+}
+} */
 
 
 

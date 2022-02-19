@@ -58,7 +58,7 @@ export default class Navbar extends Component {
       console.log(this.state.role.username);
         return (
             <div> 
-          <nav class="navbar navbar-expand-sm">
+          <nav className ="navbar navbar-expand-sm">
           {this.state.role.username !== undefined ? (
           <button
                onClick = {this.handleSidebar}
@@ -68,7 +68,13 @@ export default class Navbar extends Component {
                <span />
              </button>
                ):(
-                null
+                <ul className="navbar-nav ml-auto rightnav">
+                <li>
+               <Link to="/" onClick={this.logout} className="logoutadminlink" style = {{marginRight:"20px",textDecoration:"none",fontSize:"18px"}}>
+              Logout
+              </Link>
+              </li>
+              </ul>
               )}
              <div  onClick={this.handleSidebar.bind(this)} className={`overlay ${this.state.sideBar ? "open" : ""}`}>
             </div>
@@ -83,7 +89,7 @@ export default class Navbar extends Component {
                 </li>
                 <li className = "mt-3 mb-2">
                <Link to={{ pathname: "/history", state: this.state.role }}>
-                    BookRecords
+               BookHistory
                     </Link>
                 </li>
                 <li>
@@ -92,6 +98,9 @@ export default class Navbar extends Component {
                     </Link>
                  
                 </li>
+                <Link to="/" onClick={this.logout} className="logoutlink" style = {{marginRight:"20px",textDecoration:"none",fontSize:"18px"}}>
+               Logout
+               </Link>
                </ul>
                         ):(
                           null

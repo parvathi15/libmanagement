@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Route , withRouter} from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Features from './Features';
 import books from "./img/books.png";
 
 
@@ -16,9 +17,21 @@ import books from "./img/books.png";
         errorMessage: "",
         users:[],
         timePassed:false,
+        showModal: false,
+        show:false,
         localuser:{}
       };
       this.timerId = null;
+  }
+
+  showModal = (e) => {
+    this.setState(prevState => ({
+        showModal: !prevState.showModal 
+    }));
+  }
+
+  handleModal() {
+    this.setState({show:!this.state.show})
   }
 
       changeUserName = e => {
@@ -92,9 +105,8 @@ import books from "./img/books.png";
      console.log(this.state.localuser)
         return (
             <div class="login_wrapper">
-            <div class="alert alert-primary mt-5" role="alert" style = {{height:"80px",fontSize:"17px",color: "#595771",background:"#e4dce7"}}>
-            <span className="d-block"><b>Librarian:</b> librarian@gmail.com</span>
-            <span><b>Password:</b> admin</span>
+            <div class="alert alert-primary mt-5" role="alert" style = {{height:"60px",fontSize:"17px",color: "#595771",background:"#e4dce7",margin:"0px auto",borderColor:"#ab67bc !important"}}>
+            <span className="d-block">Check our <Link to = "/features" onClick={()=>{this.handleModal()}}><b>Instructions</b></Link></span>
             </div>
             <form class="login_box" onSubmit={this.submitLogin}>
                 <div class="login_brand">
@@ -124,6 +136,11 @@ import books from "./img/books.png";
                             <p className = "errormsg">{this.state.errorMessage}</p>
                             
                             </form>
+                            {this.state.showModal && 
+          <Features 
+            onCloseModal={this.showModal} 
+          />
+        } 
                             </div>
             
             

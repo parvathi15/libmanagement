@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from "./Components/Navbar";
 import Login from "./Components/Login";
+import Features from "./Components/Features";
 import Homepage from "./Components/user/Homepage";
 import ViewBook from "./Components/user/ViewBook";
 import Userbooks from "./Components/user/Userbooks";
@@ -39,6 +40,7 @@ export default class App extends Component {
 <Switch>
   <Route exact path="/" component={Login} />
   <Route exact path="/Register" component={Register} />
+  <Route exact path="/features" component={Features} />
   <div>
     <Navbar />
     <Route path="/homepage" component={Homepage} />

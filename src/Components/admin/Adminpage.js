@@ -99,7 +99,7 @@ export default class Adminpage extends Component {
             <Link className = "ml-5" style = {{ marginLeft: "12px"}} to= {{
               pathname:'/return',
             }}>
-            Return Books
+            Issued Books
             </Link>
             </p>
             </div>
