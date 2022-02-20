@@ -36,7 +36,7 @@ export default class Features extends Component {
 <p>Once your book request is successfull you can read it for one month.</p>
 <p>Make sure to return the borrowed book by the due date.</p>
 <p>You can extend the book after the due date only once.</p>
-<p>A penalty of 400rs will be charged if borrowed book is not returned on due date.</p>
+<p>A penalty of 400rs will be charged if borrowed book is not returned on due date..</p>
 <p>Your account would be inactive if you dont clear your dues.</p>
 </ul>
 {/* </div>
