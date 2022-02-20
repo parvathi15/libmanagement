@@ -11,7 +11,7 @@ export default class Features extends Component {
         this.setState(prevState => ({
             showModal: !prevState.showModal 
         }));
-        window.location = "/";
+        window.location = "/libmanagement";
       }
   render() {
     return (
