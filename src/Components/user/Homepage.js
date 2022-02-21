@@ -151,7 +151,7 @@ class HomePage extends Component {
              } else if (this.state.books_taken >0){
               this.setState({ message: "You have to return the book before requesting a new book" })
             } else if (count === 0){
-              this.setState({ message: "We have no more copies of this book" })
+              this.setState({ message: "Currently We have no more copies of this book.Please wait until the user returns the book" })
             }else {
               this.setState({ message: "You can request one book at a time" })
             }
