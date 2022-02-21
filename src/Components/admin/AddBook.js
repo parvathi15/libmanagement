@@ -102,7 +102,7 @@ export default class AddBook extends Component {
         if(!this.state.title){
            formIsValid = false;
            errors["title"] = "Book Title field cannot be empty";
-        } else if(!this.state.title.match(/^[a-zA-Z]+$/)){ 
+        } else if(!this.state.title.match(/^[a-zA-Z ]*$/)){ 
               formIsValid = false;
               errors["title"] = "Book Title is not valid";
             }
@@ -114,7 +114,7 @@ export default class AddBook extends Component {
        if(!this.state.author){
         formIsValid = false;
         errors["author"] = "Author field cannot be empty";
-     } else if(!this.state.author.match(/^[a-zA-Z]+$/)){ 
+     } else if(!this.state.author.match(/^[a-zA-Z ]*$/)){ 
            formIsValid = false;
            errors["author"] = "Author name is not valid";
          }
@@ -126,7 +126,7 @@ export default class AddBook extends Component {
     if(!this.state.subject){
       formIsValid = false;
       errors["subject"] = "Subject field cannot be empty";
-   } else if(!this.state.subject.match(/^[a-zA-Z]+$/)){ 
+   } else if(!this.state.subject.match(/^[a-zA-Z ]*$/)){ 
          formIsValid = false;
          errors["subject"] = "Subject name is not valid";
        }
@@ -148,7 +148,7 @@ export default class AddBook extends Component {
           console.log('validation failed')
         }
         const regid = /^[0-9]+$/;
-        const alphaRegex = /^[a-zA-Z]+$/;
+        const alphaRegex = /^[a-zA-Z ]*$/;
        
        console.log(this.state.bookid);
         const newbook = {
