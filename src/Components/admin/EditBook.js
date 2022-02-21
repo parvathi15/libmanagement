@@ -169,10 +169,10 @@ export default class EditBook extends Component {
             };
         
             console.log(editbook);
-            if( this.state.bookid && this.state.title && this.state.subject 
-              && this.state.author
-              && (regid.test(this.state.bookid) === true) && (alphaRegex.test(this.state.title) === true) 
-              && (alphaRegex.test(this.state.author) === true) && (alphaRegex.test(this.state.subject) === true)){
+            // if( this.state.bookid && this.state.title && this.state.subject 
+            //   && this.state.author
+            //   && (regid.test(this.state.bookid) === true) && (alphaRegex.test(this.state.title) === true) 
+            //   && (alphaRegex.test(this.state.author) === true) && (alphaRegex.test(this.state.subject) === true)){
             axios
               .post(
                 "https://library-api123.herokuapp.com/books/update/" + this.props.match.params.id,
@@ -182,7 +182,7 @@ export default class EditBook extends Component {
         
             window.location = "/libmanagement/list";
           }
-        }
+        // }
         
     render() {
         return (
