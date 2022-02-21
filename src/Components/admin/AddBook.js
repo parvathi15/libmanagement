@@ -210,7 +210,7 @@ export default class AddBook extends Component {
           </div>
               <div className="form-group">
             <label className="ip_label mt-3">Subject: </label>
-            <input placeholder="Enter Author" className="input" name="subject" type="text" value={this.state.subject}  onChange={this.onChangeSubject}/>
+            <input placeholder="Enter Subject" className="input" name="subject" type="text" value={this.state.subject}  onChange={this.onChangeSubject}/>
          
              <span style={{color: "#db2525"}}>{this.state.errors["subject"]}</span>
           </div>
