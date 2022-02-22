@@ -76,7 +76,7 @@ deleteMember(id) {
              class="fa fa-search form-control-feedback"
              style={{
                position: "relative",
-               top: "-40px",
+               top: "-44px",
                right: "44px",
                float: "right",
                fontSize: "21px",

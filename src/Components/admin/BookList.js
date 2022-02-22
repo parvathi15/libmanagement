@@ -79,7 +79,7 @@ class BookList extends Component {
                class="fa fa-search form-control-feedback"
                style={{
                  position: "relative",
-                 top: "-36px",
+                 top: "-44px",
                  right: "44px",
                  float: "right",
                  fontSize: "21px",
