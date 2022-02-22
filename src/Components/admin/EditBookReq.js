@@ -42,7 +42,7 @@ export default class EditBookReq extends Component {
         axios
           .get("https://library-api123.herokuapp.com/requests/" + this.props.match.params.id)
           .then(response => {
-              console.log(response.data)
+             
             this.setState({
               username: response.data.user,
               title:response.data.title,
@@ -57,7 +57,7 @@ export default class EditBookReq extends Component {
             });
           })
           .catch(function(error) {
-            console.log(error);
+         
           });
         }
 
@@ -118,7 +118,7 @@ export default class EditBookReq extends Component {
               issue_date: new Date(this.state.issue_date),
               due_date: new Date(this.state.due_date)
             };
-              console.log(bookreq);
+              
 
   //            if(this.state.status === "select" && this.state.issue_date === "" || this.state.due_date === "") {
   // alert("Please enter all fields")
@@ -137,7 +137,7 @@ export default class EditBookReq extends Component {
 
      
         hasChangedSinceInitialState = () => {
-          // console.log("sample:"+this.iniDueDate+":"+this.state.due_date+(String(this.iniDueDate) === String(this.state.due_date)))    ;
+        
           let result="";
           if(this.state.issue_date == "" || this.state.due_date == "" || this.state.status === ""){
             result="disabled";

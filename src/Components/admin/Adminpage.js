@@ -12,7 +12,7 @@ import addbook from "../img/addbook.png";
 export default class Adminpage extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    
   this.state = { 
    users:[]
     };
@@ -23,10 +23,10 @@ export default class Adminpage extends Component {
       .get("https://library-api123.herokuapp.com/members/")
       .then(response => {
         this.setState({ users: response.data });
-        console.log(this.state.users)
+       
       })
       .catch(error => {
-        console.log(error);
+        
       });
   }
     render() {

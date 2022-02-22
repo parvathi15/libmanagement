@@ -8,7 +8,7 @@ import { Route , withRouter} from 'react-router-dom';
  class RequestList extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+  
   this.state = { 
    books:[],
    showModal: false,
@@ -34,17 +34,17 @@ componentDidMount() {
     .get("https://library-api123.herokuapp.com/members/status/pending")
     .then(response => {
       this.setState({ members: response.data });
-      console.log(this.state.members)
+    
     })
     .catch(error => {
-      console.log(error);
+     
     });
 }
 
 deleteMember(id) {
-    console.log(id);
+    
     axios.delete("https://library-api123.herokuapp.com/members/" + id).then(response => {
-      console.log(response.data);
+     
     });
 
     this.setState({

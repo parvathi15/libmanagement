@@ -150,7 +150,7 @@ export default class AddBook extends Component {
         const regid = /^[0-9]+$/;
         const alphaRegex = /^[a-zA-Z ]*$/;
        
-       console.log(this.state.bookid);
+     
         const newbook = {
           bookid: this.state.bookid,
           title: this.state.title,

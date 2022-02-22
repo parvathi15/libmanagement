@@ -171,7 +171,7 @@ class Register extends Component {
       } else if(this.state.password === "" && this.state.reEnterPassword === "" && this.state.password.length <= 3) {
         this.setState({ errorMessage: "Please enter proper password" })
       } else {
-        console.log(this.state.errorMessage)
+        console.log("")
       // this.setState({ errorMessage: "Please enter proper detials" })
     }
   }

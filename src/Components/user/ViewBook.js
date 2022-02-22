@@ -8,13 +8,13 @@ import Moment from 'moment';
 export default class Viewbook extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
+        
         this.IssueDate = this.IssueDate.bind(this);
         this.DueDate = this.DueDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         const iniDueDate="";
 
-        console.log(this.props);
+     
         this.state = { 
             atoken: window.localStorage.getItem("MyUser"),
             user:"",
@@ -74,14 +74,14 @@ export default class Viewbook extends Component {
     componentDidMount() {
         const token = JSON.parse(this.state.atoken);
         const reader = token.username
-        console.log(reader)
+        
           this.setState({
             user:token.username
           })
           axios
           .get("https://library-api123.herokuapp.com/requests/" + this.props.match.params.id)
           .then(response => {
-              console.log(response.data)
+              
               this.iniDueDate=new Date(response.data.due_date);
             this.setState({
               username: response.data.user,
@@ -97,7 +97,7 @@ export default class Viewbook extends Component {
             });
           })
           .catch(function(error) {
-            console.log(error);
+            
           });
           
         }
@@ -105,7 +105,7 @@ export default class Viewbook extends Component {
 
         onSubmit(e) {
           e.preventDefault();
-          console.log(this.state.issue_date)
+  
           const extendreq = {
            
             username: this.state.user,
@@ -119,7 +119,7 @@ export default class Viewbook extends Component {
             issue_date: new Date(this.state.issue_date),
             due_date: new Date(this.state.due_date)
           };
-            console.log(extendreq);
+            
 
           axios
             .post(
@@ -131,12 +131,11 @@ export default class Viewbook extends Component {
             );
       
            window.location = "/libmanagement/userbook";
-          // console.log(res)
-          // this.setState({errorMessage:res.data.message})
+         
         }
 
         hasChangedSinceInitialState = () => {
-          // console.log("sample:"+this.iniDueDate+":"+this.state.due_date+(String(this.iniDueDate) === String(this.state.due_date)))    ;
+          
           let result="";
           if(String(this.iniDueDate) === String(this.state.due_date)){
             result="disabled";

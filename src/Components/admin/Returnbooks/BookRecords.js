@@ -42,20 +42,20 @@ class BookRecords extends Component {
           .get("https://library-api123.herokuapp.com/requests/")
           .then(response => {
             this.setState({ bookrecords: response.data });
-            console.log(this.state.bookrecords);
+          
           })
           .catch(error => {
-            console.log(error);
+            
           });
       }
 
       handleOnClick= async (number) => {
-        console.log(number);
+       
   
     const url = `https://library-api123.herokuapp.com/books/`+number;
             const api_call = await fetch(url);
             const data = await api_call.json();
-            console.log(data);
+            
                  const bookrecord = {
                 bookid: data.bookid,
                 title: data.title,
@@ -64,7 +64,7 @@ class BookRecords extends Component {
                 date: data.date,
                 user:this.props.location.state.user.username
               };
-              console.log(bookrecord)
+              
             
             axios
             .post("https://library-api123.herokuapp.com/requests/add", bookrecord)
@@ -72,9 +72,9 @@ class BookRecords extends Component {
         }
 
         deleteuserRequest(id) {
-          console.log(id);
+         
           axios.delete("https://library-api123.herokuapp.com/requests/" + id).then(response => {
-            console.log(response.data);
+           
           });
       
           this.setState({
@@ -143,7 +143,7 @@ class BookRecords extends Component {
           || user.author.toLowerCase().indexOf(this.state.searchTerm) > -1;
         })
 .map(req => {
-  console.log(this.state.bookrecords)
+  
       const dueTime = Moment(req.due_date).format('MM-DD-YYYY')
       const issueTime = Moment(req.issue_date).format('MM-DD-YYYY')
       const todayDateFormat = Moment(new Date()).format('MM-DD-YYYY');

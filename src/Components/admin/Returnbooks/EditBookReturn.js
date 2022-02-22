@@ -7,7 +7,7 @@ import { Button,Modal } from 'react-bootstrap';
 export default class EditBookReturn extends Component {
     constructor(props) {
         super(props);
-       console.log(this.props)
+      
         // this.onChangeUsername = this.onChangeUsername.bind(this);
          this.ChangeReturnStatus = this.ChangeReturnStatus.bind(this);
         // this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -37,7 +37,7 @@ export default class EditBookReturn extends Component {
         axios
           .get("https://library-api123.herokuapp.com/requests/" + this.props.match.params.id)
           .then(response => {
-              console.log(response.data)
+             
             this.setState({
               username: response.data.user,
               title:response.data.title,
@@ -49,7 +49,7 @@ export default class EditBookReturn extends Component {
             });
           })
           .catch(function(error) {
-            console.log(error);
+            
           });
         }
 
@@ -102,7 +102,7 @@ export default class EditBookReturn extends Component {
               date: new Date(this.state.date)
             };
         
-            console.log(bookreq);
+         
         
             axios
               .post(

@@ -8,7 +8,7 @@ var moment = require('moment');
  class Userbooks extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
+        
       this.state = { 
         atoken: window.localStorage.getItem("MyUser"),
         user:"",
@@ -44,9 +44,9 @@ var moment = require('moment');
     }
 
       deleteBook(id) {
-        console.log(id);
+       
         axios.delete("https://library-api123.herokuapp.com/requests/" + id).then(response => {
-          console.log(response.data);
+        
         });
     
         this.setState({
@@ -57,12 +57,12 @@ var moment = require('moment');
 
       
       hasChangedSinceInitialState = (due_date,status) => {
-        console.log(status)
+       
         let a="";
         let result="";
         if(status === true){
           result="disabled";
-          console.log(result)
+          
         }
         return(result);
       }
@@ -73,7 +73,7 @@ var moment = require('moment');
       // request.due_date = Date.parse(req.body.due_date);
     
     changestatus(book){
-      console.log(book._id)
+  
       const returnbook = {
         username:book.user,
         title:book.title,
@@ -86,7 +86,7 @@ var moment = require('moment');
         issue_date:book.issue_date,
         due_date:book.due_date
        };
-        console.log(returnbook);
+        
         axios
         .post(
           "https://library-api123.herokuapp.com/requests/update/" + book._id,
@@ -99,14 +99,14 @@ var moment = require('moment');
     componentDidMount() {
       const token = JSON.parse(this.state.atoken);
       const reader = token.username
-      console.log(reader)
+    
         this.setState({
           user:token.username
         })
         axios
           .get(`https://library-api123.herokuapp.com/requests/user/${reader}/Reading`)
           .then(response => {
-            console.log(response)
+            
             this.setState({ bookreq: response.data });
             this.setState({ bookreq: response.data });
             for (var i = 0; i < this.state.bookreq.length; i++) {
@@ -116,13 +116,13 @@ var moment = require('moment');
            }
           })
           .catch(error => {
-            console.log(error);
+           
           });
           this.vanishMessage()
       }
     render() {
       var moment = require('moment');
-      console.log(this.state.condition)
+     
         return (
     <div className= "container">
       {this.state.condition === "Due date is extended" ?(
@@ -158,9 +158,9 @@ var moment = require('moment');
   const todayDate = Moment(new Date()).format('MM-DD-YYYY');
   var issue_date = moment(lastdate, "MM-DD-YYYY");
   issue_date.add(30, 'days');
-  console.log(issue_date);
+
   var dueDate = Moment(issue_date).format('MM-DD-YYYY')
-  console.log(dueDate);
+
 this.hasChangedSinceInitialState(book.due_date,book.returnstatus)
 
 return (  

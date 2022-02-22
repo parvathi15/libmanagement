@@ -9,7 +9,7 @@ import { Route , withRouter} from 'react-router-dom';
 class BookList extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
+       
       this.state = { 
        books:[],
        showModal: false,
@@ -39,17 +39,17 @@ class BookList extends Component {
           .get("https://library-api123.herokuapp.com/books/sachu")
           .then(response => {
             this.setState({ books: response.data });
-            console.log(this.state.books)
+           
           })
           .catch(error => {
-            console.log(error);
+          
           });
       }
 
       deleteBook(id) {
-        console.log(id);
+      
         axios.delete("https://library-api123.herokuapp.com/books/" + id).then(response => {
-          console.log(response.data);
+          
         });
     
         this.setState({

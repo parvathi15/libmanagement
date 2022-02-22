@@ -96,7 +96,7 @@ export default class EditBook extends Component {
   //  }
 
       componentDidMount() {
-        console.log(this.props.match.params.id)
+        
         axios
           .get("https://library-api123.herokuapp.com/books/" + this.props.match.params.id)
           .then(response => {
@@ -109,7 +109,7 @@ export default class EditBook extends Component {
             });
           })
           .catch(function(error) {
-            console.log(error);
+            
           });
         }
         onChangeBookId=e=> {
@@ -168,7 +168,7 @@ export default class EditBook extends Component {
             
             };
         
-            console.log(editbook);
+            
             // if( this.state.bookid && this.state.title && this.state.subject 
             //   && this.state.author
             //   && (regid.test(this.state.bookid) === true) && (alphaRegex.test(this.state.title) === true) 

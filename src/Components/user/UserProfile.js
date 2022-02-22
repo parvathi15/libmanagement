@@ -4,7 +4,7 @@ import axios from "axios";
 export default class UserProfile extends Component {
     constructor(props) {
         super(props)
-         console.log(this.props.location.state);
+        
          this.state = {
           user: "",
           name:"",
@@ -125,8 +125,7 @@ export default class UserProfile extends Component {
           fine:this.props.location.state.fine,
           password: this.state.password
       };
-      console.log(this.state.password);
-      console.log(this.state.reEnterPassword);
+     
         
         if(this.state.password === this.state.reEnterPassword){
         axios
@@ -135,17 +134,16 @@ export default class UserProfile extends Component {
             editMember
           )
           .then(res => 
-            // console.log(res)
+          
           this.setState({ statusmsg: res.data }),
           this.setState({ updatemsg: "Password changed successfully." })
           )}  else {
-            console.log(this.state.updatemsg)
+          
           }
           this.vanishMessage()
       }
   render() {
-    console.log(this.state.updatemsg)
-    console.log(this.state.user)
+    
     return <div className='container'>
         {this.state.statusmsg === "Member updated!" ?(
         <p className = "alert-success" style={{ display: this.state.display }}>{this.state.updatemsg}</p> 

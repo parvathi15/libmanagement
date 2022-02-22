@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 class HomePage extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
+       
       this.state = { 
         availablebooks: [],
         bookid:"",
@@ -54,7 +54,7 @@ class HomePage extends Component {
         var myFutureDate=new Date(myCurrentDate);
          myFutureDate.setDate(myFutureDate.getDate()+ 30);
         const dueDate = Moment(myFutureDate).format('MM-DD-YYYY');
-        console.log(dueDate)
+       
         this.setState({ 
           due_date: dueDate
       });
@@ -63,7 +63,7 @@ class HomePage extends Component {
           fine:this.props.location.state.user.fine
         })
         const token = JSON.parse(this.state.atoken);
-        console.log(token.username);
+      
         this.setState({ 
             user: token.username
         });
@@ -71,10 +71,10 @@ class HomePage extends Component {
           .get("https://library-api123.herokuapp.com/books/sachu")
           .then(response => {
             this.setState({ availablebooks: response.data });
-            console.log(this.state.availablebooks);
+           
           })
           .catch(error => {
-            console.log(error);
+           
           });
 
           axios
@@ -82,33 +82,15 @@ class HomePage extends Component {
           .then(response => {
             this.setState({ books_taken: response.data.length
             });
-            console.log(this.state.books_taken);
+            
           })
           .catch(error => {
-            console.log(error);
+            
           });
  }
 
-//  componentDidUpdate(prevState){
-//   const username = this.props.location.state.user.username;
-//   if (prevState.books_taken !== this.state.books_taken) {
-//   axios
-//   .get(`http://localhost:2500/requests/user/${username}/reading`)
-//   .then(response => {
-//     this.setState({ books_taken: response.data.length
-//     });
-//     console.log(this.state.books_taken);
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
-//  }
-// }
-
-
-
-  close=()=>{
-        console.log(this.state.show);
+ close=()=>{
+        
         if (!this.state.show) {
         this.setState({ display: "none" });
         }
@@ -117,7 +99,7 @@ class HomePage extends Component {
 
       handleOnClick= async (number,count) => {
         this.setState({ display: "block" });
-        console.log(this.state.due_date);
+        
         const todayDate = Moment(new Date()).format('MM-DD-YYYY');
         const username = this.props.location.state.user.username;
     const url = `https://library-api123.herokuapp.com/books/sachu/${number}`;
@@ -137,14 +119,14 @@ class HomePage extends Component {
               issue_date:todayDate,
               due_date:this.state.due_date
             };
-            console.log(bookrecord)
+            
             if(this.state.books_taken < 1 && this.state.bookrecord.length < 1 && count > 0) {
               axios
               .post("https://library-api123.herokuapp.com/requests/add", bookrecord)
               .then(res => 
               this.setState({ message: res.data.message }),
               this.setState({ bookrecord: [...this.state.bookrecord, bookrecord] }),
-              console.log(this.state.bookrecord.length)
+              
               ).catch(err=>{
                 this.setState({ message: err })
               })
@@ -158,7 +140,7 @@ class HomePage extends Component {
               this.vanishMessage()
           }
     render() {
-      console.log(this.state.books_taken);
+   
     return (
       <div>
        {this.state.message === "Your request is Successful" ?(
@@ -225,8 +207,8 @@ class HomePage extends Component {
    
 <tbody className={this.state.fine > 0 ? 'disabled':'active'}>
 {this.state.availablebooks.filter(user => {
- return user.title.toLowerCase().indexOf(this.state.searchTerm) > -1
- || user.author.toLowerCase().indexOf(this.state.searchTerm) > -1;
+ return user.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+ || user.author.toLowerCase().includes(this.state.searchTerm.toLowerCase())
 })
 .map(book => {
   return (

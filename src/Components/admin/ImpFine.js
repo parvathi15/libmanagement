@@ -27,7 +27,7 @@ export default class ImpFine extends Component {
         axios
         .get("https://library-api123.herokuapp.com/requests/"+ this.props.match.params.id)
         .then(response => {
-          console.log(response)
+         
           this.setState({
             username: response.data.user,
             title:response.data.title,
@@ -38,7 +38,7 @@ export default class ImpFine extends Component {
         axios
           .get(`https://library-api123.herokuapp.com/members/user/${this.state.username}`)
           .then(response => {
-            console.log(response)
+            
             this.setState({
               username: response.data[0].username,
               status: response.data[0].status,
@@ -49,7 +49,7 @@ export default class ImpFine extends Component {
           })
         })
           .catch(function(error) {
-            console.log(error);
+            
           });
         }
 
@@ -91,7 +91,7 @@ export default class ImpFine extends Component {
             date: this.state.date,
             fine:this.state.fine
         };
-        console.log(reminder)
+        
         
         axios
         .post(

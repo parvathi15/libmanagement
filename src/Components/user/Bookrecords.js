@@ -6,7 +6,7 @@ import Moment from 'moment';
  class Bookrecords extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
+      
       this.state = { 
         records: [],
         };
@@ -19,33 +19,16 @@ import Moment from 'moment';
           .get("http://localhost:2500/books/")
           .then(response => {
             this.setState({ records: response.data });
-            console.log(this.state.records);
+            
           })
           .catch(error => {
-            console.log(error);
+            
           });
       }
     
     
       handleOnClick= async (number) => {
-          console.log(number);
-        // const url = `http://localhost:2500/books/`+number;
-        // const api_call = await fetch(url);
-        // const data = await api_call.json();
-        // console.log(data);
-        //      const bookrecord = {
-        //     bookid: data.bookid,
-        //     name: data.name,
-        //     subject:data.subject,
-        //     author:data.author,
-        //     date: data.date,
-        //     status: data.status
-        //   };
-        //   console.log(bookrecord)
-        
-        // axios
-        // .post("http://localhost:2500/requests/add", bookrecord)
-        // .then(res => console.log(res.data));
+         ;
 
       }
     

@@ -45,21 +45,10 @@ export default class EditRequest extends Component {
         });
       })
       .catch(function(error) {
-        console.log(error);
+       
       });
 
-    // axios
-    //   .get("http://localhost:8000/users/")
-    //   .then(response => {
-    //     if (response.data.length > 0) {
-    //       this.setState({
-    //         users: response.data.map(user => user.username)
-    //       });
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+
   }
 
   onChangeUsername(e) {
@@ -99,7 +88,7 @@ export default class EditRequest extends Component {
       fine:this.state.fine
     };
 
-    console.log(member);
+  
 
     axios
       .post(

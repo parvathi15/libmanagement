@@ -10,12 +10,13 @@ import books from "./img/books.png";
  class Login extends Component {
   constructor(props) {
     super(props)
-     console.log(this.props.updateUser);
+   
     this.state = {
         email: "",
         password: "",
         errorMessage: "",
         users:[],
+        display:"none",
         timePassed:false,
         showModal: false,
         show:false,
@@ -57,7 +58,7 @@ import books from "./img/books.png";
         this.setState({
           localuser:localStorage.setItem("MyUser", JSON.stringify(this.state.localuser))
         })
-        console.log(this.state.localuser)
+        
       }
 
       submitLogin = (e) => {
@@ -95,14 +96,14 @@ import books from "./img/books.png";
         
           
           else {
-            console.log("invalid Data")
+            console.log("")
           }
           })
           }
         
       
     render() {
-     console.log(this.state.localuser)
+     
         return (
             <div class="login_wrapper">
             <div class="alert alert-primary mt-5" role="alert" style = {{height:"60px",fontSize:"17px",color: "#595771",background:"#e4dce7",margin:"0px auto",borderColor:"#ab67bc !important"}}>
@@ -133,7 +134,11 @@ import books from "./img/books.png";
                            </p>
                             </div>
                     
-                            <p className = "errormsg">{this.state.errorMessage}</p>
+                            {this.state.errorMessage === ""?(
+                            <p className = "errormsg" style={{ display: this.state.display }}>{this.state.errorMessage}</p>
+                            ):(
+                              <p className = "errormsg">{this.state.errorMessage}</p>
+                            )}
                             
                             </form>
                             {this.state.showModal && 

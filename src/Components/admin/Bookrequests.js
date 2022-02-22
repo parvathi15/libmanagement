@@ -20,10 +20,10 @@ import Moment from 'moment';
           .get("https://library-api123.herokuapp.com/requests/")
           .then(response => {
             this.setState({ userrequests: response.data });
-            console.log(this.state.userrequests);
+           
           })
           .catch(error => {
-            console.log(error);
+           
           });
       }
 
@@ -34,12 +34,12 @@ import Moment from 'moment';
       }
 
       handleOnClick= async (number) => {
-        console.log(number);
+       
   
     const url = `https://library-api123.herokuapp.com/books/`+number;
             const api_call = await fetch(url);
             const data = await api_call.json();
-            console.log(data);
+           
                  const bookrecord = {
                 bookid: data.bookid,
                 title: data.title,
@@ -48,7 +48,7 @@ import Moment from 'moment';
                 date: data.date,
                 user:this.props.location.state.user.username
               };
-              console.log(bookrecord)
+              
             
             axios
             .post("https://library-api123.herokuapp.com/requests/add", bookrecord)
@@ -56,9 +56,9 @@ import Moment from 'moment';
         }
 
         deleteuserRequest(id) {
-          console.log(id);
+         
           axios.delete("https://library-api123.herokuapp.com/requests/" + id).then(response => {
-            console.log(response.data);
+           
           });
       
           this.setState({
@@ -133,7 +133,7 @@ import Moment from 'moment';
   || user.title.toLowerCase().indexOf(this.state.searchTerm) > -1;
 })
 .map(req => {
-  console.log(req)
+  
   const todayDateFormat = Moment(new Date()).format('DD MMM YYYY');
   const issueTime = Moment(req.issue_date).format('DD MMM YYYY');
   const DueTime = Moment(req.due_date).format('DD MMM YYYY')
