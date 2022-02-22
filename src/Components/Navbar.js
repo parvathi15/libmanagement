@@ -22,7 +22,7 @@ export default class Navbar extends Component {
       componentDidMount = async () => {
     
         const token = JSON.parse(this.state.atoken);
-        console.log(token.username);
+      
         this.setState({
           role:token
         })
@@ -55,7 +55,7 @@ export default class Navbar extends Component {
         localStorage.setItem("MyUser", JSON.stringify(""))
         }  
     render() {
-      console.log(this.state.role.username);
+     
         return (
             <div> 
           <nav className ="navbar navbar-expand-sm">

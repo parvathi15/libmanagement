@@ -71,7 +71,7 @@ import books from "./img/books.png";
           axios
           .post("https://library-api123.herokuapp.com/members/login", user)
           .then(res => {
-            console.log(res)
+            
             this.setState({errorMessage:res.data.message})
           if (res.data.message === "Login Successfull") {
             localStorage.setItem("MyUser", JSON.stringify(res.data.user))
