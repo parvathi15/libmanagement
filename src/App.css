@@ -413,7 +413,7 @@ login */
 
 .errormsg {
   color: rgb(219, 37, 37);
-    background: antiquewhite;
+    background: #FFC8C8;
     font-weight: 500;
     padding: 0.5rem 0.5rem;
     margin: 0px auto;
