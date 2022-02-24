@@ -178,11 +178,7 @@ return (
 <td>{book.subject}</td>
 <td>{Moment(book.issue_date).format('MM-DD-YYYY')}</td>
 <td>{Moment(book.due_date).format('MM-DD-YYYY')}</td>
-{book.status === "reading" ?  (
-<td className='readingstatus'>{book.status}</td>
-):(
-<td className='returnedstatus'>{book.status}</td>
-)}
+<td>{book.status}</td>
 </tr>
   )
   
