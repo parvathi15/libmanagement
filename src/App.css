@@ -411,6 +411,22 @@ login */
   margin:0 auto;
 }
 
+.readingstatus {
+  color: rgb(219, 37, 37);
+    background: #FFC8C8;
+    width:82px;
+    padding: 6px;
+    border-radius: 5px;
+}
+
+.returnedstatus {
+  color: rgb(26, 61, 38) !important;
+  background: #94DCA6 !important;
+    width:82px;
+    padding: 6px;
+    border-radius: 5px;
+}
+
 .errormsg {
   color: rgb(219, 37, 37);
     background: #FFC8C8;

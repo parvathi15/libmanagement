@@ -104,7 +104,8 @@ deleteMember(id) {
 <tbody>
 
 {this.state.members.filter(user => {
-  return user.username.toLowerCase().indexOf(this.state.searchTerm) > -1
+   return user.username.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+   || user.email.toLowerCase().includes(this.state.searchTerm.toLowerCase())
 })
 .map(currentmember => {
 return (

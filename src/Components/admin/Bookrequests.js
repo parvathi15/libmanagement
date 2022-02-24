@@ -129,8 +129,8 @@ import Moment from 'moment';
 <tbody>
 
 {this.state.userrequests.filter(user => {
-  return user.user.toLowerCase().indexOf(this.state.searchTerm) > -1
-  || user.title.toLowerCase().indexOf(this.state.searchTerm) > -1;
+   return user.user.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+   || user.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
 })
 .map(req => {
   

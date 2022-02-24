@@ -110,9 +110,9 @@ class BookList extends Component {
 <tbody>
 
 {this.state.books.filter(user => {
-          return user.title.toLowerCase().indexOf(this.state.searchTerm) > -1
-          || user.author.toLowerCase().indexOf(this.state.searchTerm) > -1;
-        })
+   return user.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+   || user.author.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+})
 .map(book => {
   return (
 <tr>
