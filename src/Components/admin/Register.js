@@ -189,17 +189,17 @@ class Register extends Component {
         <div class="ip_container userType">
         <label class="ip_label">Username</label>
         <input placeholder="Name" class="input" name="name" type="text" value={this.state.username} onChange={this.onChangeUsername}/>
-        <span style={{color: "#db2525"}}>{this.state.errors["username"]}</span>
+        {/* <span style={{color: "#db2525"}}>{this.state.errors["username"]}</span> */}
           </div>
           <div class="ip_container userType">
                             <label class="ip_label">Email</label>
                             <input placeholder="name@email.com" class="input" name="email" type="text" value={this.state.email} onChange={ this.onChangeEmail } />
-                            <span style={{color: "#db2525"}}>{this.state.errors["email"]}</span>
+                            {/* <span style={{color: "#db2525"}}>{this.state.errors["email"]}</span> */}
                             </div>
                             <div class="ip_container userType">
                             <label class="ip_label">Password</label>
                             <input placeholder="Password" class="input" name="password" type="password" value={this.state.password} onChange={this.onChangePassword}/>
-                            <span style={{color: "#db2525"}}>{this.state.errors["password"]}</span>
+                            {/* <span style={{color: "#db2525"}}>{this.state.errors["password"]}</span> */}
                             </div>
    
                             <div class="ip_container userType">
