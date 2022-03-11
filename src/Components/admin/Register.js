@@ -136,14 +136,14 @@ class Register extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    if(this.handleValidation()){
-      console.log('validation successful')
-    }else{
-      console.log('validation failed')
-    }
-    const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    const passwordRegex = /(?=.*[0-9])/;
-    var usernameRegex = /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/;
+    // if(this.handleValidation()){
+    //   console.log('validation successful')
+    // }else{
+    //   console.log('validation failed')
+    // }
+    // const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    // const passwordRegex = /(?=.*[0-9])/;
+    // var usernameRegex = /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/;
     const member = {
       username: this.state.username,
       status: this.state.status,
