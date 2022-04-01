@@ -38,6 +38,14 @@ export default class Features extends Component {
 <p>You can extend the book after the due date only once.</p>
 <p>A penalty of 400rs will be charged if borrowed book is not returned on due date..</p>
 <p>Your account would be inactive if you dont clear your dues.</p>
+<p>Your account would be inactive if you dont clear your dues.</p>
+<p>For demo the Sample user details are:<br></br>
+  <b>Email:</b>matrix@gmail.com 
+  <b>password:</b>123456</p>
+  <p>Librarian Details:
+  <b>Email:</b>librarian@gmail.com 
+  <b>password:</b>admin</p>
+
 </ul>
 {/* </div>
 </div> */}
