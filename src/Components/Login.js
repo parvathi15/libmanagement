@@ -64,7 +64,7 @@ import books from "./img/books.png";
       submitLogin = (e) => {
         e.preventDefault();
         const user = {
-          email: this.state.email,
+          email: this.state.email.toLowerCase(),
           password: this.state.password
           };
          
