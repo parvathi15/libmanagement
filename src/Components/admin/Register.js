@@ -120,7 +120,7 @@ class Register extends Component {
       //   formIsValid = false;
       //   errors["password"] = "Please enter at least one digit.";
       // }
-         '^[0-9]*$'
+        //  '^[0-9]*$'
          errors["password"] = "Password field cannot be empty";
         } else if(!this.state.password.match('^[0-9]*$')) {
           formIsValid = false;
