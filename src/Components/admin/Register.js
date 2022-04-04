@@ -116,7 +116,7 @@ class Register extends Component {
       if(!this.state.password){
          formIsValid = false;
          errors["password"] = "Password field cannot be empty";
-        } else if (!this.state.username.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/i)){
+        } else if (!this.state.password.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/i)){
           formIsValid = false;
           errors["username"] = "Please enter alphabets or alphanumerals";
       } else if(this.state.password.length < 8) {
