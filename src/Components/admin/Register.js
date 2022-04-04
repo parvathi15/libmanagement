@@ -13,6 +13,7 @@ class Register extends Component {
     this.state = {
       username: "",
       status: 'pending',
+      display:"none",
       email: "",
       fine:0,
       date: new Date(),
@@ -35,10 +36,10 @@ class Register extends Component {
   vanishMessage() {
     this.timerId = setTimeout(() => {
     this.setState({
-      message: ""
+      errorMessage: ""
     });
     this.timerId = null;
-  }, 150000); 
+  }, 9000); 
 }
 
   onChangeUsername(e) {
@@ -77,73 +78,75 @@ class Register extends Component {
 
   handleValidation(){
 
-       let errors = {};
-       let formIsValid = true;
-       let lastAtPos = this.state.email.lastIndexOf('@');
-       let lastDotPos = this.state.email.lastIndexOf('.');
-       if(!this.state.username){
+    let errors = {};
+    let formIsValid = true;
+    let lastAtPos = this.state.email.lastIndexOf('@');
+    let lastDotPos = this.state.email.lastIndexOf('.');
+    if(!this.state.username){
+       formIsValid = false;
+       errors["username"] = "UserName field cannot be empty";
+    } else if (!this.state.username.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/)){
           formIsValid = false;
-          errors["username"] = "UserName field cannot be empty";
-       } else if (!this.state.username.match(/^[a-zA-Z]+$/)){
-             formIsValid = false;
-             errors["username"] = "Please enter alphabets or alphanumerals";
-      } else {
-        formIsValid = false;
-        // errors["password"] = " Please fill properly";
-      }
+          errors["username"] = "Please enter alphabets or alphanumerals";
+   } else {
+     formIsValid = false;
+     // errors["password"] = " Please fill properly";
+   }
 
-      if(this.state.username.indexOf(' ') >= 0){
-        formIsValid = false;
-        errors["username"] = "Please avoid spaces";
-    }
-       
+   if(this.state.username.indexOf(' ') >= 0){
+     formIsValid = false;
+     errors["username"] = "Please avoid spaces";
+ }
+    
 
-       if(!this.state.email){
+    if(!this.state.email){
+       formIsValid = false;
+       errors["email"] = "Email field cannot be empty";
+    } else if (!(lastAtPos < lastDotPos && lastAtPos > 0 && this.state.email.indexOf('@@') === -1 && lastDotPos > 2 && (this.state.email.length - lastDotPos) > 2)) {
           formIsValid = false;
-          errors["email"] = "Email field cannot be empty";
-       } else if (!(lastAtPos < lastDotPos && lastAtPos > 0 && this.state.email.indexOf('@@') === -1 && lastDotPos > 2 && (this.state.email.length - lastDotPos) > 2)) {
-             formIsValid = false;
-             errors["email"] = "Email is not valid";
-           } else if (this.state.email.indexOf(' ') >= 0) {
-            formIsValid = false;
-            errors["email"] = "Please avoid spaces";
-          }
-       else {
-        formIsValid = false;
-        // errors["password"] = " Please fill properly";
-      }
+          errors["email"] = "Email is not valid";
+        }
+    else {
+     formIsValid = false;
+     // errors["password"] = " Please fill properly";
+   }
 
-    //  username validation /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/
+ //  username validation /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/  (passwordRegex.test(this.state.password) === true)
 
-      if(!this.state.password){
-         formIsValid = false;
-         errors["password"] = " Password field cannot be empty";
-      } else if(this.state.password.length < 8 || this.state.password.length > 15) {
-        formIsValid = false;
-        errors["password"] = " Please fill at least 8 character";
-      } else if(!this.state.password.match(/[0-9]/g)) {
-        formIsValid = false;
-        errors["password"] = "Please enter at least one digit.";
-      } else {
-        formIsValid = false;
-      }
-      this.setState({errors: errors});
-      return formIsValid;
-  }
-
+   if(!this.state.password){
+      formIsValid = false;
+      errors["password"] = " Password field cannot be empty";
+     } else if(!this.state.password.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/)) {
+       formIsValid = false;
+       errors["password"] = "Please enter valid password.";
+   } else if(this.state.password.length < 8) {
+     formIsValid = false;
+     errors["password"] = " Please enter at least 8 character";
+   } else if(!this.state.password.match(/[0-9]/g)) {
+     formIsValid = false;
+     errors["password"] = "Please enter at least one digit.";
+   } else {
+     console.log(this.state.password)
+   }
+   this.setState({errors: errors});
+   return formIsValid;
+}
 
 
 
   onSubmit(e) {
     e.preventDefault();
-    // if(this.handleValidation()){
-    //   console.log('validation successful')
-    // }else{
-    //   console.log('validation failed')
-    // }
-    // const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    // const passwordRegex = /(?=.*[0-9])/;
-    // var usernameRegex = /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/;
+    if(this.handleValidation()){
+      console.log('validation successful')
+    }else{
+      console.log('validation failed')
+    }
+    // var re =/^[a-z_A-Z\-0-9\.\*\#\$\!\~\%\^\&\-\+\?\|]+@+[a-zA-Z\-0-9]+(.com)$/i; 
+    // password=/(?=.*[0-9])/i
+    // password=/[0-9]/g
+    const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    const passwordRegex = /[0-9]/g;
+    var usernameRegex = /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/;
     const member = {
       username: this.state.username,
       status: this.state.status,
@@ -153,15 +156,17 @@ class Register extends Component {
      
     };
     if( this.state.username && this.state.email && this.state.password 
-      && this.state.status && (this.state.password === this.state.reEnterPassword)){
+      && this.state.status && (this.state.password === this.state.reEnterPassword)
+      && (regex.test(this.state.email) === true) && (passwordRegex.test(this.state.password) === true) && (this.state.password.length >= 8)
+      && (usernameRegex.test(this.state.username) === true)){
       axios
       .post("https://library-api123.herokuapp.com/members/add", member)
-      .then(res => console.log(res)) 
+      .then(res => this.setState({ reg_message: res.data }),
+      ) 
       .catch(err=>{
         this.setState({ reg_message: err })
       })
-      window.location = "/libmanagement";
-      this.vanishMessage()
+      // window.location = "/";
     } else if(this.state.username === "" || this.state.email === "" || this.state.password === "" || this.state.reEnterPassword === "") {
       this.setState({ errorMessage: "Please Fill the fields" })
     } else if(this.state.password !== this.state.reEnterPassword) {
@@ -169,19 +174,28 @@ class Register extends Component {
       } else if(this.state.password === "" && this.state.reEnterPassword === "" && this.state.password.length <= 3) {
         this.setState({ errorMessage: "Please enter proper password" })
       } else {
-        console.log("")
+        console.log(this.state.errorMessage)
       // this.setState({ errorMessage: "Please enter proper detials" })
     }
+    this.vanishMessage()
   }
+
 
   render() {
     return (
       <div class="login_wrapper">
       {this.state.reg_message === 200 ? (
-       <p className='successmsg'>Your request is Successful</p>
+       <p className='successmsg'>Your request is Successfull.Go back to
+       <b> Login Page</b></p>
      ):(
-       <p></p>
+      <p className = "validation_msg" style={{ display: this.state.display }}>{this.state.errorMessage}</p>
      )}
+
+{this.state.errorMessage === ""?(
+ <p className = "validation_msg" style={{ display: this.state.display }}>{this.state.errorMessage}</p>
+   ):(
+ <p className = "validation_msg">{this.state.errorMessage}</p>
+  )}
   
         <form className="register_box mb-1"  onSubmit={this.onSubmit}>
         <div class="login_header">Register</div>

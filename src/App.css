@@ -483,7 +483,37 @@ login */
     top: 67px;
 }
 
+
+
+.validation_msg {
+  color: rgb(219, 37, 37);
+    background: antiquewhite;
+    font-weight: 500;
+    padding: 0.5rem 0.5rem;
+    margin: 0px auto;
+    position: relative;
+    top: 40px;
+    width: 351px;
+    height: 42px;
+    border-radius: 5px;
+    text-align: center;
+}
+
 .successmsg  {
+  color: rgb(26, 61, 38);
+  background: #94DCA6;
+    font-weight: 500;
+    padding: 0.5rem 0.5rem;
+    margin: 0px auto;
+    position: relative;
+    top: 17px;
+    width: 420px;
+    height: 50px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* .successmsg  {
   color: rgb(26, 61, 38);
   background: #94DCA6;
     font-weight: 500;
@@ -494,7 +524,7 @@ login */
     width: 351px;
     height: 42px;
     border-radius: 5px;
-}
+} */
 .notifymsg  {
   color: rgb(219, 37, 37);
     background: antiquewhite;
