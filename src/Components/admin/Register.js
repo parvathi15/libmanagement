@@ -115,16 +115,10 @@ class Register extends Component {
 
       if(!this.state.password){
          formIsValid = false;
-        //  old regular-/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/
-      // } else if(!this.state.password.match(/[0-9]/g)) {
-      //   formIsValid = false;
-      //   errors["password"] = "Please enter at least one digit.";
-      // }
-        //  '^[0-9]*$'
          errors["password"] = "Password field cannot be empty";
-        } else if(!this.state.password.match('^[0-9]*$')) {
+        } else if (!this.state.username.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/i)){
           formIsValid = false;
-          errors["password"] = "Please enter numerals.";
+          errors["username"] = "Please enter alphabets or alphanumerals";
       } else if(this.state.password.length < 8) {
         formIsValid = false;
         errors["password"] = " Please enter at least 8 character";
