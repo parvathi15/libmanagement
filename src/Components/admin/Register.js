@@ -140,7 +140,7 @@ class Register extends Component {
     // password=/(?=.*[0-9])/i
     // password=/[0-9]/g
     const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    const passwordRegex = '^[0-9]*$';
+    const passwordRegex = /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/i;
     var usernameRegex = /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/i;
     const member = {
       username: this.state.username,
