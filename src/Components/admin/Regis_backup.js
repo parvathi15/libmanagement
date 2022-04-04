@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Route , withRouter} from 'react-router-dom';
-
+import validator from 'validator';
 
 
 class Register extends Component {
@@ -78,59 +78,61 @@ class Register extends Component {
 
   handleValidation(){
 
-       let errors = {};
-       let formIsValid = true;
-       let lastAtPos = this.state.email.lastIndexOf('@');
-       let lastDotPos = this.state.email.lastIndexOf('.');
-       if(!this.state.username){
+    let errors = {};
+    let formIsValid = true;
+    let lastAtPos = this.state.email.lastIndexOf('@');
+    let lastDotPos = this.state.email.lastIndexOf('.');
+    if(!this.state.username){
+       formIsValid = false;
+       errors["username"] = "UserName field cannot be empty";
+    } else if (!this.state.username.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/)){
           formIsValid = false;
-          errors["username"] = "UserName field cannot be empty";
-       } else if (!this.state.username.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/)){
-             formIsValid = false;
-             errors["username"] = "Please enter alphabets or alphanumerals";
-      } else {
-        formIsValid = false;
-        // errors["password"] = " Please fill properly";
-      }
+          errors["username"] = "Please enter alphabets or alphanumerals";
+   } else {
+     formIsValid = false;
+     // errors["password"] = " Please fill properly";
+   }
 
-      if(this.state.username.indexOf(' ') >= 0){
-        formIsValid = false;
-        errors["username"] = "Please avoid spaces";
-    }
-       
+   if(this.state.username.indexOf(' ') >= 0){
+     formIsValid = false;
+     errors["username"] = "Please avoid spaces";
+ }
+    
 
-       if(!this.state.email){
+    if(!this.state.email){
+       formIsValid = false;
+       errors["email"] = "Email field cannot be empty";
+    } else if (!(lastAtPos < lastDotPos && lastAtPos > 0 && this.state.email.indexOf('@@') === -1 && lastDotPos > 2 && (this.state.email.length - lastDotPos) > 2)) {
           formIsValid = false;
-          errors["email"] = "Email field cannot be empty";
-       } else if (!(lastAtPos < lastDotPos && lastAtPos > 0 && this.state.email.indexOf('@@') === -1 && lastDotPos > 2 && (this.state.email.length - lastDotPos) > 2)) {
-             formIsValid = false;
-             errors["email"] = "Email is not valid";
-           }
-       else {
-        formIsValid = false;
-        // errors["password"] = " Please fill properly";
-      }
+          errors["email"] = "Email is not valid";
+        }
+    else {
+     formIsValid = false;
+     // errors["password"] = " Please fill properly";
+   }
 
-    //  username validation /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/  (passwordRegex.test(this.state.password) === true)
+ //  username validation /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/  (passwordRegex.test(this.state.password) === true)
 
-      if(!this.state.password){
-         formIsValid = false;
-         errors["password"] = " Password field cannot be empty";
-        } else if(!this.state.password.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/)) {
-          formIsValid = false;
-          errors["password"] = "Please enter valid password.";
-      } else if(this.state.password.length < 8) {
-        formIsValid = false;
-        errors["password"] = " Please enter at least 8 character";
-      } else if(!this.state.password.match(/[0-9]/g)) {
-        formIsValid = false;
-        errors["password"] = "Please enter at least one digit.";
-      } else {
-        console.log(this.state.password)
-      }
-      this.setState({errors: errors});
-      return formIsValid;
-  }
+   if(!this.state.password){
+      formIsValid = false;
+      errors["password"] = " Password field cannot be empty";
+     } else if(!this.state.password.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/)) {
+       formIsValid = false;
+       errors["password"] = "Please enter valid password.";
+   } else if(this.state.password.length < 8) {
+     formIsValid = false;
+     errors["password"] = " Please enter at least 8 character";
+   } else if(!this.state.password.match(/[0-9]/g)) {
+     formIsValid = false;
+     errors["password"] = "Please enter at least one digit.";
+   } else {
+     console.log(this.state.password)
+   }
+   this.setState({errors: errors});
+   return formIsValid;
+}
+
+
 
   onSubmit(e) {
     e.preventDefault();
@@ -158,7 +160,7 @@ class Register extends Component {
       && (regex.test(this.state.email) === true) && (passwordRegex.test(this.state.password) === true) && (this.state.password.length >= 8)
       && (usernameRegex.test(this.state.username) === true)){
       axios
-      .post("http://localhost:3500/members/add", member)
+      .post("https://library-api123.herokuapp.com/members/add", member)
       .then(res => this.setState({ reg_message: res.data }),
       ) 
       .catch(err=>{
@@ -178,18 +180,16 @@ class Register extends Component {
     this.vanishMessage()
   }
 
+
   render() {
     return (
       <div class="login_wrapper">
-      {this.state.reg_message === "Member added!" ? (
-       
+      {this.state.reg_message === 200 ? (
        <p className='successmsg'>Your request is Successfull.Go back to
        <b> Login Page</b></p>
-      
      ):(
       <p className = "validation_msg" style={{ display: this.state.display }}>{this.state.errorMessage}</p>
      )}
-
 
 {this.state.errorMessage === ""?(
  <p className = "validation_msg" style={{ display: this.state.display }}>{this.state.errorMessage}</p>
@@ -233,7 +233,7 @@ class Register extends Component {
           </div>
           
           </div>
-        
+          <p className = "errormsg">{this.state.errorMessage}</p>
         </form>
       </div>
     );
