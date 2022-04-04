@@ -85,7 +85,7 @@ class Register extends Component {
        if(!this.state.username){
           formIsValid = false;
           errors["username"] = "UserName field cannot be empty";
-       } else if (!this.state.username.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/)){
+       } else if (!this.state.username.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/i)){
              formIsValid = false;
              errors["username"] = "Please enter alphabets or alphanumerals";
       } else {
@@ -115,16 +115,19 @@ class Register extends Component {
 
       if(!this.state.password){
          formIsValid = false;
-         errors["password"] = " Password field cannot be empty";
-        } else if(!this.state.password.match(/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/)) {
+        //  old regular-/^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/
+      // } else if(!this.state.password.match(/[0-9]/g)) {
+      //   formIsValid = false;
+      //   errors["password"] = "Please enter at least one digit.";
+      // }
+         '^[0-9]*$'
+         errors["password"] = "Password field cannot be empty";
+        } else if(!this.state.password.match('^[0-9]*$')) {
           formIsValid = false;
-          errors["password"] = "Please enter valid password.";
+          errors["password"] = "Please enter numerals.";
       } else if(this.state.password.length < 8) {
         formIsValid = false;
         errors["password"] = " Please enter at least 8 character";
-      } else if(!this.state.password.match(/[0-9]/g)) {
-        formIsValid = false;
-        errors["password"] = "Please enter at least one digit.";
       } else {
         console.log(this.state.password)
       }
@@ -143,8 +146,8 @@ class Register extends Component {
     // password=/(?=.*[0-9])/i
     // password=/[0-9]/g
     const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    const passwordRegex = /[0-9]/g;
-    var usernameRegex = /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/;
+    const passwordRegex = '^[0-9]*$';
+    var usernameRegex = /^[a-z0-9]+([-_\s]{0}[a-z0-9]+)*$/i;
     const member = {
       username: this.state.username,
       status: this.state.status,

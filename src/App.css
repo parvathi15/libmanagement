@@ -874,6 +874,12 @@ tbody{
     display:block !important;
     color:white !important;
   }
+
+  .successmsg  {
+ 
+      width: 310px;
+      height: 60px;
+  }
   /* .register_box {
      max-width: 460px; 
     position: absolute;
@@ -903,6 +909,12 @@ tbody{
     text-decoration: none !important;
   }
 
+  .successmsg  {
+ 
+    width: 310px;
+    height: 60px;
+}
+
 }
 
 
@@ -917,6 +929,12 @@ tbody{
     color: white;
     text-decoration: none !important;
   }
+
+  .successmsg  {
+ 
+    width: 350px;
+    height: 60px;
+}
 
   /* .rightnav .logoutadminlink a {
     display:none !important;
@@ -964,6 +982,11 @@ tbody{
 .rightnav .logoutadminlink {
   display:none !important;
 }
+.successmsg  {
+ 
+  width: 350px;
+  height: 60px;
+}
 }
 
 @media (min-width: 768px) {
@@ -987,6 +1010,11 @@ tbody{
   background: rgb(228, 220, 231);
   border-radius: 5px;
   text-align: center;
+}
+.successmsg  {
+ 
+  width: 350px;
+  height: 60px;
 }
 }
 
@@ -1055,19 +1083,20 @@ tbody{
     margin-right: 3rem;
     font-weight: bold;
   }
+  .successmsg  {
+ 
+    width: 400px;
+    height: 55px;
+  }
 }
 
-/* @media (min-width: 1280px) {
-  .quiz-topic {
-    margin: 15px !important;
-    width: 320px !important;
-    height: 210px;
-    border: 0.5px solid #e7dfdf;
-    background: rgb(228, 220, 231);
-    border-radius: 5px;
-    text-align: center;
+@media (min-width: 1280px) {
+  .successmsg  {
+ 
+    width: 420px;
+    height: 50px;
+  }
 }
-} */
 
 
 
