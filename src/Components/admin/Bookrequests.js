@@ -14,10 +14,23 @@ import Moment from 'moment';
         searchTerm: ''
       };
     }
+
+
+    fetchRequests = () => {
+      axios
+        .get("http://localhost:5000/requests/")
+        .then(response => {
+          console.log("Fetched requests:", response.data);
+          this.setState({ userrequests: response.data });
+        })
+        .catch(error => {
+          console.error("Error fetching requests:", error);
+        });
+    };
       componentDidMount = async () => {
  
         axios
-          .get("https://library-api123.herokuapp.com/requests/")
+          .get("http://localhost:5000/requests/")
           .then(response => {
             this.setState({ userrequests: response.data });
            
@@ -25,6 +38,12 @@ import Moment from 'moment';
           .catch(error => {
            
           });
+          this.fetchRequests();
+      }
+
+
+      componentDidMount =  () => {
+          this.fetchRequests();
       }
 
       showModal = (e) => {
@@ -33,31 +52,33 @@ import Moment from 'moment';
         }));
       }
 
-      handleOnClick= async (number) => {
-       
-  
-    const url = `https://library-api123.herokuapp.com/books/`+number;
-            const api_call = await fetch(url);
-            const data = await api_call.json();
-           
-                 const bookrecord = {
-                bookid: data.bookid,
-                title: data.title,
-                subject:data.subject,
-                author:data.author,
-                date: data.date,
-                user:this.props.location.state.user.username
-              };
-              
-            
-            axios
-            .post("https://library-api123.herokuapp.com/requests/add", bookrecord)
-            .then(res => console.log(res.data));
-        }
+
+ 
+      handleOnClick = async (number) => {
+        const url = `http://localhost:5000/books/${number}`;
+        const api_call = await fetch(url);
+        const data = await api_call.json();
+    
+        const bookrecord = {
+          bookid: data.bookid,
+          title: data.title,
+          subject: data.subject,
+          author: data.author,
+          date: data.date,
+          user: this.props.location.state.user.username
+        };
+    
+        axios
+          .post("http://localhost:5000/requests/add", bookrecord)
+          .then(() => {
+            this.fetchRequests(); // Refresh the user requests list
+          })
+          .catch(err => console.error("Error adding request:", err));
+      }
 
         deleteuserRequest(id) {
          
-          axios.delete("https://library-api123.herokuapp.com/requests/" + id).then(response => {
+          axios.delete("http://localhost:5000/requests/" + id).then(response => {
            
           });
       
@@ -71,6 +92,8 @@ import Moment from 'moment';
               searchTerm: e.target.value
           });
         }
+
+
       
     render() {
         return (
@@ -165,13 +188,7 @@ import Moment from 'moment';
       >
        <i class="fa fa-trash"></i>
       </a>
-      {/* <a
-        onClick={() => {
-          this.deleteuserRequest(req._id);
-        }}
-      >
-       <i class="fa fa-trash"></i>
-      </a> */}
+ 
     </td>
     
    

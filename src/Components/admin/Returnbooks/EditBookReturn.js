@@ -35,7 +35,7 @@ export default class EditBookReturn extends Component {
 
     componentDidMount() {
         axios
-          .get("https://library-api123.herokuapp.com/requests/" + this.props.match.params.id)
+          .get("http://localhost:5000/requests/" + this.props.match.params.id)
           .then(response => {
              
             this.setState({
@@ -106,7 +106,7 @@ export default class EditBookReturn extends Component {
         
             axios
               .post(
-                "https://library-api123.herokuapp.com/requests/update/" + this.props.match.params.id,
+                "http://localhost:5000/requests/update/" + this.props.match.params.id,
                 bookreq
               )
               .then(res => console.log(res.data));

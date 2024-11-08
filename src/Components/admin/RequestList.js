@@ -31,7 +31,7 @@ search=e=> {
 
 componentDidMount() {
   axios
-    .get("https://library-api123.herokuapp.com/members/status/pending")
+    .get("http://localhost:5000/members/status/pending")
     .then(response => {
       this.setState({ members: response.data });
     
@@ -43,7 +43,7 @@ componentDidMount() {
 
 deleteMember(id) {
     
-    axios.delete("https://library-api123.herokuapp.com/members/" + id).then(response => {
+    axios.delete("http://localhost:5000/members/" + id).then(response => {
      
     });
 

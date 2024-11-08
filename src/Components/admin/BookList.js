@@ -36,8 +36,9 @@ class BookList extends Component {
 
       componentDidMount() {
         axios
-          .get("https://library-api123.herokuapp.com/books/sachu")
+          .get("http://localhost:5000/books")
           .then(response => {
+            console.log(response)
             this.setState({ books: response.data });
            
           })
@@ -48,7 +49,7 @@ class BookList extends Component {
 
       deleteBook(id) {
       
-        axios.delete("https://library-api123.herokuapp.com/books/" + id).then(response => {
+        axios.delete("http://localhost:5000/books/" + id).then(response => {
           
         });
     
@@ -114,13 +115,14 @@ class BookList extends Component {
    || user.author.toLowerCase().includes(this.state.searchTerm.toLowerCase())
 })
 .map(book => {
+  console.log(book)
   return (
 <tr>
 <td >{book.bookid}</td>
 <td>{book.title}</td>
 <td>{book.author}</td>
 <td>{book.subject}</td>
-<td>{book.count}</td>
+<td>{book.copies}</td>
 <td>{Moment(book.date).format('DD MMM YYYY')}</td>
 <td>
 

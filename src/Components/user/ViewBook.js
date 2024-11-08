@@ -123,7 +123,7 @@ export default class Viewbook extends Component {
 
           axios
             .post(
-              "https://library-api123.herokuapp.com/requests/update/" + this.props.match.params.id,
+              "http://localhost:5000/requests/update/" + this.props.match.params.id,
               extendreq
             )
             .then(res => 

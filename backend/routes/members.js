@@ -8,31 +8,67 @@ router.route("/").get((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 
+// router.route("/login").post((req, res) => {
+//   const email = req.body.email;
+//   const password = req.body.password;
+//   console.log(email);
+//   Member.findOne({ email: email}, (err, user) => {
+//       if(user){
+//         console.log(user);
+//           if(user.status === "pending") {
+//               res.send({message: "need approval from admin",user: user})
+//           } else if (user.status === "Rejected") {
+//             res.send({message: "Admin rejected your membership",user: user})  
+//           } else if (password === user.password && user.status === "Accepted" ) {
+//               res.send({ message: "Login Successfull",user: user})
+//           } else if (email !== "" && password === "" ) {
+//             res.send({ message: "Please Enter Password",user: user})
+//         }  
+//         else {
+//             res.send({ message: "Incorrect Password"})
+//         }
+          
+//       } else {
+//           res.send({message: "User not registered"})
+//       }
+//   })
+// }) 
+
+// POST login route
 router.route("/login").post((req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  console.log(email);
-  Member.findOne({ email: email}, (err, user) => {
-      if(user){
-        console.log(user);
-          if(user.status === "pending") {
-              res.send({message: "need approval from admin",user: user})
-          } else if (user.status === "Rejected") {
-            res.send({message: "Admin rejected your membership",user: user})  
-          } else if (password === user.password && user.status === "Accepted" ) {
-              res.send({ message: "Login Successfull",user: user})
-          } else if (email !== "" && password === "" ) {
-            res.send({ message: "Please Enter Password",user: user})
-        }  
-        else {
-            res.send({ message: "Incorrect Password"})
-        }
-          
-      } else {
-          res.send({message: "User not registered"})
+
+  console.log("Login attempt for email:", email);
+
+  // Check for user by email
+  Member.findOne({ email: email }, (err, user) => {
+      if (err) {
+          return res.status(500).json({ message: "Internal Server Error" });
       }
-  })
-}) 
+
+      if (!user) {
+          return res.status(404).json({ message: "User not registered" });
+      }
+
+      // Check user status
+      if (user.status === "pending") {
+          return res.status(403).json({ message: "Need approval from admin", user: user });
+      } else if (user.status === "Rejected") {
+          return res.status(403).json({ message: "Admin rejected your membership", user: user });
+      } 
+
+      // Check password
+      if (password !== user.password) {
+          return res.status(401).json({ message: "Incorrect Password" });
+      }
+
+      // If status is accepted and password matches
+      if (user.status === "Accepted") {
+          return res.status(200).json({ message: "Login Successful", user: user });
+      }
+  });
+});
 
 router.route("/add").post((req, res) => {
   const username = req.body.username;

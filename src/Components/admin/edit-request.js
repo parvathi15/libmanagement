@@ -35,7 +35,7 @@ export default class EditRequest extends Component {
 
   componentDidMount() {
     axios
-      .get("https://library-api123.herokuapp.com/members/" + this.props.match.params.id)
+      .get("http://localhost:5000/members/" + this.props.match.params.id)
       .then(response => {
         this.setState({
           username: response.data.username,
@@ -92,7 +92,7 @@ export default class EditRequest extends Component {
 
     axios
       .post(
-        "https://library-api123.herokuapp.com/members/update/" + this.props.match.params.id,
+        "http://localhost:5000/members/update/" + this.props.match.params.id,
         member
       )
       .then(res => console.log(res.data));

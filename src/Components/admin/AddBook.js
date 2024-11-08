@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 
 export default class AddBook extends Component {
@@ -8,235 +6,196 @@ export default class AddBook extends Component {
         super(props);
         
         this.state = {
-          bookid:"",
+          bookid: "",
           title: "",
-          author:"",
+          author: "",
           subject: "",
           errors: {},
-          date: new Date(),
           status: 'available',
-          copies:0,
-          message:"",
-          display:"none"
+          copies: 0,
+          message: "", // Holds feedback message
+          display: "none" 
         };
+        
         this.timerId = null;
-        // this.onChangeUsername = this.onChangeUsername.bind(this);
-        // this.onChangeStatus = this.onChangeStatus.bind(this);
-        // this.onChangeDuration = this.onChangeDuration.bind(this);
-        // this.onChangeDate = this.onChangeDate.bind(this);
-        // this.onSubmit = this.onSubmit.bind(this);
-      }
-
-      vanishMessage() {
-        this.timerId = setTimeout(() => {
-        this.setState({
-          message: "",
-          display:"none"
-        });
-        this.timerId = null;
-      }, 3000); 
     }
+
+    vanishMessage() {
     
-      onChangeBookId=e=> {
-        this.setState({
-          bookid: e.target.value
-        });
-      }
-    
-      onChangeName = e => {
-        this.setState({
-          title: e.target.value
-        });
-      }
+        this.timerId = setTimeout(() => {
+          this.setState({
+            message: "",
+            display: "none"
+          });
+          this.timerId = null;
+        }, 3000);
+    }
+   
+    onChangeBookId = (e) => this.setState({ bookid: e.target.value });
+    onChangeName = (e) => this.setState({ title: e.target.value });
+    onChangeCopies = (e) => this.setState({ copies: e.target.value });
+    onChangeAuthor = (e) => this.setState({ author: e.target.value });
+    onChangeSubject = (e) => this.setState({ subject: e.target.value });
 
-      onChangeCopies = e => {
-        this.setState({
-          copies: e.target.value
-        });
-      }
-      onChangeStatus(e) {
-        this.setState({
-          status: 'available'
-        });
-      }
-      onChangeAuthor=(e)=> {
-        this.setState({
-          author: e.target.value
-        });
-      }
-      onChangeSubject=(e)=> {
-        this.setState({
-          subject: e.target.value
-        });
-      }
-      onChangeDate(date) {
-        this.setState({
-          date: date
-        });
-      }
-
-      bookid
-
-      handleValidation(){
-
+    handleValidation = () => {
+        const { bookid, title, author, subject } = this.state;
         let errors = {};
         let formIsValid = true;
-       
-        if(!this.state.bookid){
-           formIsValid = false;
-           errors["bookid"] = "BookID field cannot be empty";
-        } else if (!this.state.bookid.match(/^[0-9]+$/)){ 
-              formIsValid = false;
-              errors["bookid"] = "Please enter Numbers only";
-       } else {
-         formIsValid = false;
-         // errors["password"] = " Please fill properly";
-       }
- 
-       if(this.state.bookid.indexOf(' ') >= 0){
-         formIsValid = false;
-         errors["bookid"] = "Please avoid spaces";
-     }
-        
- 
-        if(!this.state.title){
-           formIsValid = false;
-           errors["title"] = "Book Title field cannot be empty";
-        } else if(!this.state.title.match(/^[a-zA-Z ]*$/)){ 
-              formIsValid = false;
-              errors["title"] = "Book Title is not valid";
-            }
-        else {
-         formIsValid = false;
-         // errors["password"] = " Please fill properly";
-       }
 
-       if(!this.state.author){
-        formIsValid = false;
-        errors["author"] = "Author field cannot be empty";
-     } else if(!this.state.author.match(/^[a-zA-Z ]*$/)){ 
-           formIsValid = false;
-           errors["author"] = "Author name is not valid";
-         }
-     else {
-      formIsValid = false;
-      // errors["password"] = " Please fill properly";
-    }
-
-    if(!this.state.subject){
-      formIsValid = false;
-      errors["subject"] = "Subject field cannot be empty";
-   } else if(!this.state.subject.match(/^[a-zA-Z ]*$/)){ 
-         formIsValid = false;
-         errors["subject"] = "Subject name is not valid";
-       }
-   else {
-    formIsValid = false;
-    // errors["password"] = " Please fill properly";
-  }
-  this.setState({errors: errors});
-  return formIsValid;
- 
-   }
- 
-
-      onSubmit=(e)=> {
-        e.preventDefault();
-        if(this.handleValidation()){
-          console.log('validation successful')
-        }else{
-          console.log('validation failed')
+        // Book ID validation
+        if (!bookid) {
+            formIsValid = false;
+            errors["bookid"] = "BookID cannot be empty";
+        } else if (!/^[0-9]+$/.test(bookid)) {
+            formIsValid = false;
+            errors["bookid"] = "BookID must contain only numbers";
+        } else if (bookid.includes(' ')) {
+            formIsValid = false;
+            errors["bookid"] = "No spaces allowed in BookID";
         }
-        const regid = /^[0-9]+$/;
-        const alphaRegex = /^[a-zA-Z ]*$/;
-       
-     
-        const newbook = {
+
+        // Title validation
+        if (!title) {
+            formIsValid = false;
+            errors["title"] = "Title cannot be empty";
+        } else if (!/^[a-zA-Z ]*$/.test(title)) {
+            formIsValid = false;
+            errors["title"] = "Title must contain only letters and spaces";
+        }
+
+        // Author validation
+        if (!author) {
+            formIsValid = false;
+            errors["author"] = "Author cannot be empty";
+        } else if (!/^[a-zA-Z ]*$/.test(author)) {
+            formIsValid = false;
+            errors["author"] = "Author must contain only letters and spaces";
+        }
+
+        // Subject validation
+        if (!subject) {
+            formIsValid = false;
+            errors["subject"] = "Subject cannot be empty";
+        } else if (!/^[a-zA-Z ]*$/.test(subject)) {
+            formIsValid = false;
+            errors["subject"] = "Subject must contain only letters and spaces";
+        }
+
+        this.setState({ errors });
+        return formIsValid;
+    };
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        if (!this.handleValidation()) {
+            console.log('Validation failed');
+            return;
+        }
+        const newBook = {
           bookid: this.state.bookid,
           title: this.state.title,
-          subject:this.state.subject,
-          author:this.state.author,
+          subject: this.state.subject,
+          author: this.state.author,
           copies: this.state.copies,
           status: this.state.status
         };
-        if( this.state.bookid && this.state.title && this.state.subject 
-          && this.state.author
-          && (regid.test(this.state.bookid) === true) && (alphaRegex.test(this.state.title) === true) 
-          && (alphaRegex.test(this.state.author) === true)){
-       axios
-          .post("https://library-api123.herokuapp.com/books/add", newbook)
-          .then(res => 
+
+        // Send data to backend
+        axios
+          .post("http://localhost:5000/books/add", newBook)
+          .then((res) => {
             this.setState({ 
               message: res.data.message,
               bookid: '', 
               title: '',
               subject: '',
-              copies:'',
-              author:''
-            }))
-           .catch(err=>{
-             this.setState({ message: err })
-           })
-           this.vanishMessage()
-    }
-  }
+              copies: '',
+              author: '',
+              display: "block" 
+            });
+            this.vanishMessage(); 
+          })
+          .catch((err) => {
+            this.setState({ 
+              message: err.response?.data?.message || "Error adding book",
+              display: "block" 
+            });
+            this.vanishMessage(); 
+          });
+    };
 
     render() {
+        const { errors, message, display, bookid, title, author, subject } = this.state;
+        
         return (
           <div>
-          {this.state.message === "Book Added Successfully" ?(
-           <p className = "alert-success">{this.state.message}</p> 
-          ):(
-            <p className = "notifymsg" style={{ display: this.state.display }}>{this.state.message}</p>
-          )}
-            <div className = "container mt-5">
-            <h3 style = {{color: "#3b2341"}}>Create New Book</h3>
-            
-            <form onSubmit={this.onSubmit}>
-            <div className="form-group mt-4">
-            <label className="ip_label">BookId: </label>
-            <input placeholder="Enter Bookid" className="input" name="bookid" type="text" value={this.state.bookid}  onChange={this.onChangeBookId}/>
-            <span style={{color: "#db2525"}}>{this.state.errors["bookid"]}</span>
-          </div>
-              <div className="form-group">
-                <label className="ip_label mt-3">Title: </label>
-                <input placeholder="Enter Title" className="input" name="title" type="text" value={this.state.title}  onChange={this.onChangeName}/>
-                <span style={{color: "#db2525"}}>{this.state.errors["title"]}</span>
-              </div>
-              <div className="form-group">
-            <label className="ip_label mt-3">Author: </label>
-            <input placeholder="Enter Author" className="input" name="author" type="text" value={this.state.author}  onChange={this.onChangeAuthor}/>
-             <span style={{color: "#db2525"}}>{this.state.errors["author"]}</span>
-          </div>
-              <div className="form-group">
-            <label className="ip_label mt-3">Subject: </label>
-            <input placeholder="Enter Subject" className="input" name="subject" type="text" value={this.state.subject}  onChange={this.onChangeSubject}/>
-         
-             <span style={{color: "#db2525"}}>{this.state.errors["subject"]}</span>
-          </div>
-          {/* <div className="form-group">
-            <label className="ip_label mt-3">Copies: </label>
-            <input
-              type="text"
-              required
-              className="input"
-              value={this.state.copies}
-              onChange={this.onChangeCopies}
-            />
-          </div> */}
+            {message && (
+              <p className={`notifymsg ${message === "Book Added Successfully" ? "alert-success" : ""}`} style={{ display: display }}>
+                {message}
+              </p>
+            )}
+            <div className="container mt-5">
+              <h3 style={{ color: "#3b2341" }}>Create New Book</h3>
+              <form onSubmit={this.onSubmit}>
+                
+                <div className="form-group mt-4">
+                  <label className="ip_label">BookId: </label>
+                  <input 
+                    placeholder="Enter Bookid" 
+                    className="input" 
+                    name="bookid" 
+                    type="text" 
+                    value={bookid}  
+                    onChange={this.onChangeBookId}
+                  />
+                  <span style={{ color: "#db2525" }}>{errors["bookid"]}</span>
+                </div>
 
+                <div className="form-group">
+                  <label className="ip_label mt-3">Title: </label>
+                  <input 
+                    placeholder="Enter Title" 
+                    className="input" 
+                    name="title" 
+                    type="text" 
+                    value={title}  
+                    onChange={this.onChangeName}
+                  />
+                  <span style={{ color: "#db2525" }}>{errors["title"]}</span>
+                </div>
 
+                <div className="form-group">
+                  <label className="ip_label mt-3">Author: </label>
+                  <input 
+                    placeholder="Enter Author" 
+                    className="input" 
+                    name="author" 
+                    type="text" 
+                    value={author}  
+                    onChange={this.onChangeAuthor}
+                  />
+                  <span style={{ color: "#db2525" }}>{errors["author"]}</span>
+                </div>
 
-          <div className="form-group mt-3">
-            <input
-              type="submit"
-              value="Add Book"
-              className="add-book mt-3"
-            />
+                <div className="form-group">
+                  <label className="ip_label mt-3">Subject: </label>
+                  <input 
+                    placeholder="Enter Subject" 
+                    className="input" 
+                    name="subject" 
+                    type="text" 
+                    value={subject}  
+                    onChange={this.onChangeSubject}
+                  />
+                  <span style={{ color: "#db2525" }}>{errors["subject"]}</span>
+                </div>
+
+                <div className="form-group mt-3">
+                  <input type="submit" value="Add Book" className="add-book mt-3" />
+                </div>
+              </form> 
+            </div>
           </div>
-        </form> 
-      </div>
-      </div>
-        )
+        );
     }
 }

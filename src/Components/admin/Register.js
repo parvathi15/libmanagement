@@ -155,7 +155,7 @@ class Register extends Component {
       && (regex.test(this.state.email) === true) && (passwordRegex.test(this.state.password) === true) && (this.state.password.length >= 8)
       && (usernameRegex.test(this.state.username) === true)){
       axios
-      .post("https://library-api123.herokuapp.com/members/add", member)
+      .post("http://localhost:5000/members/add", member)
       .then(res => this.setState({ reg_message: res.data }),
       ) 
       .catch(err=>{

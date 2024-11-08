@@ -8,7 +8,7 @@ const BookSchema = new Schema(
     subject:{type:String,required:true},
     author:{type:String,required:true},
     status: { type: String, required: true },
-     copies:{type:Number,required:true}
+    copies: { type: Number, default: 5, min: 0 },
     //  author: {type: String, required: true},
     //  fine: {type: Number,default: 0 },
     //  isAvailable: { type: Boolean,default: true}

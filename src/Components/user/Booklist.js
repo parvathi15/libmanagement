@@ -33,8 +33,9 @@ export default class Booklist extends Component {
 
       componentDidMount() {
         axios
-          .get("http://localhost:2500/books/")
+          .get("http://localhost:5000/books")
           .then(response => {
+            console.log(response)
             this.setState({ books: response.data });
           })
           .catch(error => {

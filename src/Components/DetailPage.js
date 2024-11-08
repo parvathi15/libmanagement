@@ -58,7 +58,7 @@ export default class DetailPage extends Component {
         this.setState({ 
             username: localuser
         });
-        const req = await fetch(`http://localhost:2500/books/${id}`);
+        const req = await fetch(`http://localhost:5000/books/${id}`);
         const res = await req.json();
         console.log(res);
         this.setState({

@@ -98,7 +98,7 @@ export default class EditBook extends Component {
       componentDidMount() {
         
         axios
-          .get("https://library-api123.herokuapp.com/books/" + this.props.match.params.id)
+          .get("http://localhost:5000/books/" + this.props.match.params.id)
           .then(response => {
             this.setState({
                 bookid: response.data.bookid,
@@ -175,7 +175,7 @@ export default class EditBook extends Component {
             //   && (alphaRegex.test(this.state.author) === true) && (alphaRegex.test(this.state.subject) === true)){
             axios
               .post(
-                "https://library-api123.herokuapp.com/books/update/" + this.props.match.params.id,
+                "http://localhost:5000/books/update/" + this.props.match.params.id,
                 editbook
               )
               .then(res => console.log(res.data));

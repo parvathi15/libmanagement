@@ -1,6 +1,7 @@
 const router = require("express").Router();
 let Request = require("../models/request.model.js");
-const mongoose = require("mongoose"); //for database
+const mongoose = require("mongoose"); //for databasez
+const Book = require('../models/books.model.js'); 
 
 router.route("/").get((req, res) => {
     Request.find()
@@ -9,37 +10,12 @@ router.route("/").get((req, res) => {
 });
 
 
-
 router.route("/add").post((req, res) => {
-  const bookid =  Number(req.body.bookid);
-  const title = req.body.title;
-  const subject = req.body.subject;
-  const author = req.body.author;
-  const user = req.body.user;
-  const status = req.body.status;
-  const copies = req.body.copies;
-  const returnstatus = req.body.returnstatus;
-  const date = Date.parse(req.body.date);
-  const issue_date = Date.parse(req.body.issue_date);
-  const due_date = Date.parse(req.body.due_date);
-    Request.findOne(
-    { bookid: bookid,title:title,subject:subject,author:author,user:user,status:status,returnstatus:returnstatus,date:date,issue_date:issue_date,due_date:due_date}, (err, bookrecord) => {
-    if(bookrecord){
-      res.send({message: "You have already requested this book",bookrecord: bookrecord})
-    console.log("This has already been saved")
-    } else {
-   const bookid =  Number(req.body.bookid);
-  const title = req.body.title;
-  const subject = req.body.subject;
-  const author = req.body.author;
-  const user = req.body.user;
-  const status = req.body.status;
-  const copies = req.body.copies;
-  const returnstatus = req.body.returnstatus;
-  const date = Date.parse(req.body.date);
-  const issue_date = Date.parse(req.body.issue_date);
-  const due_date = Date.parse(req.body.due_date);
-  const newRequest = new Request({
+  // Log incoming request data
+  console.log("Received request data:", req.body);
+
+  // Destructure the incoming request data
+  const {
     bookid,
     title,
     subject,
@@ -50,46 +26,99 @@ router.route("/add").post((req, res) => {
     returnstatus,
     date,
     issue_date,
-    due_date
+    due_date,
+  } = req.body;
+
+  // Look up the book by its `bookid`
+  Book.findOne({ bookid: bookid }, (err, book) => {
+    if (err) {
+      return res.status(500).json({ message: "Error fetching book data", error: err });
+    }
+
+    // If the book is not found or no copies are left
+    if (!book || book.copies <= 0) {
+      return res.status(400).json({ message: "No copies available for this book." });
+    }
+
+    // Decrease the available copies by 1
+    book.copies -= 1;
+
+    // Save the updated book record
+    book.save()
+      .then(() => {
+        // Assuming you have a `Request` model, create a new request record
+        const newRequest = new Request({
+          bookid,
+          title,
+          subject,
+          author,
+          user,
+          status,
+          copies: book.copies,  // Updated copies
+          returnstatus,
+          date: new Date(date),
+          issue_date: new Date(issue_date),
+          due_date: new Date(due_date),
+        });
+
+        // Save the new request
+        newRequest
+          .save()
+          .then(() => res.json({ message: "Request was successful" }))
+          .catch((err) => res.status(400).json({ message: "Error creating request", error: err }));
+      })
+      .catch((err) => res.status(400).json({ message: "Error saving book data", error: err }));
   });
-//  console.log(newRequest);
-  newRequest
-    .save()
-    .then(() => res.send({message: "Your request is Successful"}))
-    .catch(err => res.status(400).json("Error: " + err));
-}
-})
 });
 
-// res.send({message: "Request Added"})
-    
 
 // router.route("/add").post((req, res) => {
-//   const bookid =  Number(req.body.bookid);
-//   const title = req.body.title;
-//   const subject = req.body.subject;
-//   const author = req.body.author;
-//   const user = req.body.user;
-//   const status = req.body.status;
-//   const returnstatus = req.body.returnstatus;
-//   const date = Date.parse(req.body.date);
-//   // const username =  req.body.username
-//   const newRequest = new Request({
-//     bookid,
-//     title,
-//     subject,
-//     author,
-//     user,
-//     status,
-//     returnstatus,
-//     date
-//   });
-//  console.log(newRequest);
-//   newRequest
-//     .save()
-//     .then(() => res.json("Request added!"))
-//     .catch(err => res.status(400).json("Error: " + err));
+//   console.log("Received request data:", req.body);
+//   const {
+//       bookid,
+//       title,
+//       subject,
+//       author,
+//       user,
+//       status,
+//       copies,
+//       returnstatus,
+//       date,
+//       issue_date,
+//       due_date,
+//   } = req.body;
+
+//   Request.findOne(
+//       { bookid: Number(bookid), title, subject, author, user, status, returnstatus, date: Date.parse(date), issue_date: Date.parse(issue_date), due_date: Date.parse(due_date) },
+//       (err, bookrecord) => {
+//           if (bookrecord) {
+//               console.log("This has already been saved");
+//               return res.send({ message: "You have already requested this book", bookrecord });
+//           }
+
+//           // Create a new request if it doesn't exist
+//           const newRequest = new Request({
+//               bookid: Number(bookid),
+//               title,
+//               subject,
+//               author,
+//               user,
+//               status,
+//               copies,
+//               returnstatus,
+//               date: Date.parse(date),
+//               issue_date: Date.parse(issue_date),
+//               due_date: Date.parse(due_date),
+//           });
+
+//           newRequest
+//               .save()
+//               .then(() => res.send({ message: "Your request is Successful" }))
+//               .catch(err => res.status(400).json("Error: " + err));
+//       }
+//   );
 // });
+
 
 router.route("/:id").get((req, res) => {
     Request.findById(req.params.id)
@@ -97,10 +126,34 @@ router.route("/:id").get((req, res) => {
     .catch(err => res.status(400).json("Error: " + err));
 });
 router.route("/:id").delete((req, res) => {
-    Request.findByIdAndDelete(req.params.id)
-    .then(() => res.json("Request deleted."))
-    .catch(err => res.status(400).json("Error: " + err));
+  Request.findById(req.params.id)
+      .then((request) => {
+          if (!request) {
+              return res.status(404).json("Request not found.");
+          }
+        const bookId = request.bookid;
+// Find the associated book and increment its `copies` count
+  Book.findOne({ bookid: bookId })
+  .then((book) => {
+    if (book) {
+    book.copies += 1; // Increase the copies count by 1
+     book.save()
+                  .then(() => {
+      // Delete the request after updating the book
+        Request.findByIdAndDelete(req.params.id)
+     .then(() => res.json("Request deleted and book copies updated."))
+     .catch(err => res.status(400).json("Error deleting request: " + err));
+          })
+    .catch(err => res.status(400).json("Error updating book copies: " + err));
+        } else {
+       res.status(404).json("Book not found.");
+         }
+      })
+      .catch(err => res.status(400).json("Error finding book: " + err));
+      })
+      .catch(err => res.status(400).json("Error finding request: " + err));
 });
+
 
 router.route("/update/:id").post((req, res) => {
   Request.findById(req.params.id)
@@ -191,6 +244,12 @@ router.route("/user/:param").get((req, res) => {
     // console.log(obj);
   });
 });
+
+router.get('/test', (req, res) => {
+  console.log('Test endpoint hit');
+  res.send('Test endpoint working');
+});
+
 
 router.route("/user/:param/:param2").get((req, res) => {
   var param = req.param("param");

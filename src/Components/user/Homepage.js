@@ -20,7 +20,7 @@ class HomePage extends Component {
         returnstatus:"false",
         message:"",
         show:false,
-        display:"none",
+        display:"block",
         issue_date: new Date(),
         due_date:new Date(),
         bookrecord:[],
@@ -39,7 +39,7 @@ class HomePage extends Component {
             display:"none"
           });
           this.timerId = null;
-        }, 1000); 
+        }, 4000); 
       }
 
       search=e=> {
@@ -68,18 +68,19 @@ class HomePage extends Component {
             user: token.username
         });
         axios
-          .get("https://library-api123.herokuapp.com/books/sachu")
+          .get("http://localhost:5000/books")
           .then(response => {
+            console.log(response)
             this.setState({ availablebooks: response.data });
-           
           })
           .catch(error => {
            
           });
 
           axios
-          .get(`https://library-api123.herokuapp.com/requests/user/${username}/Reading`)
+          .get(`http://localhost:5000/requests/user/${username}/Reading`)
           .then(response => {
+            console.log(response)
             this.setState({ books_taken: response.data.length
             });
             
@@ -97,58 +98,145 @@ class HomePage extends Component {
       }
 
 
-      handleOnClick= async (number,count) => {
-        this.setState({ display: "block" });
+    //   handleOnClick= async (number,count) => {
+    //     console.log(number)
+    //     console.log(count)
+    //     this.setState({ display: "block" });
         
-        const todayDate = Moment(new Date()).format('MM-DD-YYYY');
-        const username = this.props.location.state.user.username;
-    const url = `https://library-api123.herokuapp.com/books/sachu/${number}`;
-            const api_call = await fetch(url)
-            const data = await api_call.json();
+    //     const todayDate = Moment(new Date()).format('MM-DD-YYYY');
+    //     const username = this.props.location.state.user.username;
+    // const url = `http://localhost:5000/books/sachu/${number}`;
+    //         const api_call = await fetch(url)
+    //         console.log(api_call)
+    //         const data = await api_call.json();
           
-            const bookrecord = {
-              bookid: data.bookid,
-              title: data.title,
-              subject:data.subject,
-              author:data.author,
-              date: data.createdAt,
-              user:this.props.location.state.user.username,
-              status: this.state.status,
-              copies: count,
-              returnstatus:this.state.returnstatus,
-              issue_date:todayDate,
-              due_date:this.state.due_date
-            };
-            
-            if(this.state.books_taken < 1 && this.state.bookrecord.length < 1 && count > 0) {
-              axios
-              .post("https://library-api123.herokuapp.com/requests/add", bookrecord)
-              .then(res => 
-              this.setState({ message: res.data.message }),
-              this.setState({ bookrecord: [...this.state.bookrecord, bookrecord] }),
+    //         const bookrecord = {
+    //           bookid: data.bookid,
+    //           title: data.title,
+    //           subject:data.subject,
+    //           author:data.author,
+    //           date: data.createdAt,
+    //           user:this.props.location.state.user.username,
+    //           status: this.state.status,
+    //           copies: this.state.copies,
+    //           returnstatus:this.state.returnstatus,
+    //           issue_date:todayDate,
+    //           due_date:this.state.due_date
+    //         };
+    //         console.log(bookrecord)
+    //         if(this.state.books_taken < 1 && this.state.bookrecord.length < 1 && this.state.copies > 0) {
+    //           axios
+    //           .post("http://localhost:5000/requests/add", bookrecord)
+    //           .then(res => 
+    //           this.setState({ message: res.data.message }),
+    //           this.setState({ bookrecord: [...this.state.bookrecord, bookrecord] }),
               
-              ).catch(err=>{
-                this.setState({ message: err })
-              })
-             } else if (this.state.books_taken >0){
-              this.setState({ message: "You have to return the book before requesting a new book" })
-            } else if (count === 0){
-              this.setState({ message: "Currently We have no more copies of this book.Please wait until the user returns the book" })
-            }else {
-              this.setState({ message: "You can request one book at a time" })
+    //           ).catch(err=>{
+    //             this.setState({ message: err })
+    //           })
+    //          } else if (this.state.books_taken >0){
+    //           this.setState({ message: "You have to return the book before requesting a new book" })
+    //         } else if (count === 0){
+    //           this.setState({ message: "Currently We have no more copies of this book.Please wait until the user returns the book" })
+    //         }else {
+    //           this.setState({ message: "You can request one book at a time" })
+    //         }
+    //           this.vanishMessage()
+    //       }
+
+
+    handleOnClick = async (number, count) => {
+      if (this.state.books_taken >= 1) {
+        this.setState({
+          message: "You must return your current book before requesting another one.",
+          display: "block"
+        });
+        this.vanishMessage();
+        return;
+      }
+    
+      const todayDate = Moment(new Date()).format("MM-DD-YYYY");
+      const username = this.props.location.state.user.username;
+      const url = `http://localhost:5000/books/sachu/${number}`;
+    
+      try {
+        const api_call = await fetch(url);
+        const data = await api_call.json();
+    
+        const bookrecord = {
+          bookid: data.bookid,
+          title: data.title,
+          subject: data.subject,
+          author: data.author,
+          date: data.createdAt,
+          user: username,
+          status: this.state.status,
+          copies: data.copies,
+          returnstatus: this.state.returnstatus,
+          issue_date: todayDate,
+          due_date: this.state.due_date
+        };
+    
+        axios
+          .post("http://localhost:5000/requests/add", bookrecord)
+          .then((res) => {
+            if (res.status === 200) {
+              // Update the copies count for the requested book
+              this.setState(prevState => {
+                const updatedBooks = prevState.availablebooks.map(book => 
+                  book._id === number ? { ...book, copies: book.copies - 1 } : book
+                );
+    
+                return {
+                  availablebooks: updatedBooks,
+                  message: "Your request is successful",
+                  display: "block",
+                  bookrecord: [...prevState.bookrecord, bookrecord],
+                  books_taken: prevState.books_taken + 1
+                };
+              });
+            } else {
+              this.setState({
+                message: "Error: Could not complete request",
+                display: "block"
+              });
             }
-              this.vanishMessage()
-          }
+          })
+          .catch((err) => {
+            console.error("Error with /add request:", err);
+            this.setState({
+              message: "Error: Could not complete request",
+              display: "block"
+            });
+          });
+      } catch (error) {
+        console.error("Error fetching book data:", error);
+        this.setState({
+          message: "Error: Unable to retrieve book information",
+          display: "block"
+        });
+      }
+    
+      this.vanishMessage();
+    };
+    
+  
+
+
     render() {
    
     return (
       <div>
-       {this.state.message === "Your request is Successful" ?(
-        <p className = "alert-success" style={{ display: this.state.display }}>{this.state.message}</p> 
-       ):(
-        <p className = "notifymsg" style={{ display: this.state.display }}>{this.state.message}</p>
-       )}
-      <div className = "container mt-5">
+      {/* Conditionally render the message based on `this.state.message` */}
+      {this.state.message && (
+      <p 
+        className={this.state.message.includes("successful") ? "alert alert-success" : "notifymsg"} 
+        style={{ display: this.state.display }}  
+      >
+        {this.state.message}
+    </p>
+     )}
+     <div className = "container mt-5">
      {this.state.fine > 0 ? (
        <div class="alert alert-warning" role="alert" style={{ display: "block" }}>
          <a class="panel-close close"  onClick = {this.close} data-dismiss="alert">×</a> 
@@ -217,26 +305,29 @@ class HomePage extends Component {
 <td>{book.title}</td>
 <td>{book.author}</td>
 <td>{book.subject}</td>
-{book.count < 0 ? (
-<td>0</td>
-):(
-<td>{book.count}
-</td>
-)}
-<td>{Moment(book.createdAt).format('DD MMM YYYY')}</td>
-{/* <Link to={"/viewbook/" + book._id}>View</Link>  */}
-<td style = {{color: "#3b2341",fontWeight:"600"}}
-        onClick={() => {
-          const confirmBox = window.confirm(
-            "Do you really want to send request"
-          )
-          if (confirmBox === true) {
-            this.handleOnClick(book._id,book.count)}
-          }
-        }
-      >
-       Request Book
-       </td>
+<td>{book.copies}</td>
+        <td>{Moment(book.createdAt).format('DD MMM YYYY')}</td>
+        <td style={{ color: "#3b2341", fontWeight: "600" }}>
+          {book.copies > 0 ? (
+            <span
+              onClick={() => {
+                const confirmBox = window.confirm(
+                  "Do you really want to send request"
+                );
+                if (confirmBox === true) {
+                  this.handleOnClick(book._id, book.copies);
+                }
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              Request Book
+            </span>
+          ) : (
+            <span style={{ color: "red", cursor: "not-allowed" }}>
+              Not Available
+            </span>
+          )}
+        </td>
 </tr>
   )
 })}

@@ -37,26 +37,34 @@ router.get('/listedbooks',async function(req, res) {
 
 
 router.route("/add").post((req, res) => {
-  const bookid =  Number(req.body.bookid);
-  const title = req.body.title;
-  const subject = req.body.subject;
-  const author = req.body.author;
-  const status = req.body.status;
-  const copies = req.body.copies;
-  // const username =  req.body.username
-  const newBook = new Book({
-    bookid,
-    title,
-    subject,
-    author,
-    status,
-     copies
-  });
+  const { bookid, title, subject, author, status, copies } = req.body;
 
-  newBook
-    .save()
-    .then(() => res.send({message: "Book Added Successfully"}))
-    .catch(err => res.status(400).json("Error: " + err));
+  // Check if the book already exists by title and author
+  Book.findOne({ title: title, author: author })
+      .then(book => {
+          if (book) {
+              // If the book exists, return a message indicating the book already exists
+              return res.status(400).json({ message: "This book already exists with the same title and author." });
+          } else {
+              // If the book doesn't exist, proceed with adding the new book
+              const newBook = new Book({
+                  bookid,
+                  title,
+                  subject,
+                  author,
+                  status,
+                  copies
+              });
+
+              newBook
+                  .save()
+                  .then(() => res.json({ message: "Book Added Successfully" }))
+                  .catch(err => res.status(400).json({ message: "Error: " + err }));
+          }
+      })
+      .catch(err => {
+          res.status(400).json({ message: "Error checking book existence", error: err });
+      });
 });
 
 router.route("/sachu/:id").get((req, res) => {

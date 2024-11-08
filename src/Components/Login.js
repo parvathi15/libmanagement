@@ -61,46 +61,95 @@ import books from "./img/books.png";
         
       }
 
-      submitLogin = (e) => {
-        e.preventDefault();
-        const user = {
-          email: this.state.email.toLowerCase(),
-          password: this.state.password
-          };
+      // submitLogin = (e) => {
+      //   console.log("zdfsdxg")
+      //   e.preventDefault();
+      //   const user = {
+      //     email: this.state.email.toLowerCase(),
+      //     password: this.state.password
+      //     };
          
-          axios
-          .post("https://library-api123.herokuapp.com/members/login", user)
-          .then(res => {
-            
-            this.setState({errorMessage:res.data.message})
-          if (res.data.message === "Login Successfull") {
-            localStorage.setItem("MyUser", JSON.stringify(res.data.user))
-          this.props.history.push({
-          pathname: '/homepage',
-          state: {
-             user: res.data.user
-          } 
-          });
-          } 
-          if(this.state.email === "librarian@gmail.com" && this.state.password === "admin"){
-            this.props.history.push({
-              pathname: '/admin' 
-            });
-          } else if(this.state.email === "librarian@gmail.com" && this.state.password !== "admin")  {
-            this.setState({errorMessage:"Invalid Librarian"})
-          } 
+      //     axios
+      //     .post("http://localhost:6000/libmanagement/members/login", user)
+      //     .then(res => {
+      //       console.log(res)
+      //       this.setState({errorMessage:res.data.message})
+      //     if (res.data.message === "Login Successfull") {
+      //       localStorage.setItem("MyUser", JSON.stringify(res.data.user))
+      //     this.props.history.push({
+      //     pathname: '/homepage',
+      //     state: {
+      //        user: res.data.user
+      //     } 
+      //     });
+      //     } 
+      //     if(this.state.email === "librarian@gmail.com" && this.state.password === "admin"){
+      //       this.props.history.push({
+      //         pathname: '/admin' 
+      //       });
+      //     } else if(this.state.email === "librarian@gmail.com" && this.state.password !== "admin")  {
+      //       this.setState({errorMessage:"Invalid Librarian"})
+      //     } 
           
-          else if(this.state.email === "" && this.state.password === "")  {
-            this.setState({errorMessage:"Please enter the details"})
-          } 
+      //     else if(this.state.email === "" && this.state.password === "")  {
+      //       this.setState({errorMessage:"Please enter the details"})
+      //     } 
         
           
-          else {
-            console.log("")
-          }
+      //     else {
+      //       console.log("")
+      //     }
+      //     })
+      //     }
+
+    //   
+    
+    submitLogin = (e) => {
+      e.preventDefault();
+    
+      const user = {
+        email: this.state.email.toLowerCase(),
+        password: this.state.password
+      };
+    
+      // Check if the user is the librarian
+      if (user.email === "librarian@gmail.com" && user.password === "admin") {
+        // Redirect directly to the admin page for the librarian
+        this.props.history.push({
+          pathname: '/admin'
+        });
+      } else if (user.email === "librarian@gmail.com" && user.password !== "admin") {
+        // If the email is correct for the librarian but the password is incorrect
+        this.setState({ errorMessage: "Invalid Librarian" });
+      } else {
+        // Non-librarian users will go through the regular login API request
+        axios
+          .post("http://localhost:5000/members/login", user)
+          .then((res) => {
+            console.log("Response data:", res.data); // Debugging
+    
+            // Check if login is successful
+            if (res.data.message === "Login Successful") {
+              // Store user in local storage
+              localStorage.setItem("MyUser", JSON.stringify(res.data.user));
+    
+              // Redirect to the homepage
+              this.props.history.push({
+                pathname: "/homepage",
+                state: { user: res.data.user }
+              });
+            } else {
+              // Set error message if login failed
+              this.setState({ errorMessage: res.data.message });
+            }
           })
-          }
-        
+          .catch((error) => {
+            console.error("An error occurred:", error);
+            this.setState({ errorMessage: "An error occurred, please try again." });
+          });
+      }
+    };
+    
       
     render() {
      

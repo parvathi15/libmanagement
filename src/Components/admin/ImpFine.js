@@ -25,7 +25,7 @@ export default class ImpFine extends Component {
 
       componentDidMount() {
         axios
-        .get("https://library-api123.herokuapp.com/requests/"+ this.props.match.params.id)
+        .get("http://localhost:5000/requests/"+ this.props.match.params.id)
         .then(response => {
          
           this.setState({
@@ -36,7 +36,7 @@ export default class ImpFine extends Component {
           });
     
         axios
-          .get(`https://library-api123.herokuapp.com/members/user/${this.state.username}`)
+          .get(`http://localhost:5000/members/user/${this.state.username}`)
           .then(response => {
             
             this.setState({
@@ -95,7 +95,7 @@ export default class ImpFine extends Component {
         
         axios
         .post(
-          `https://library-api123.herokuapp.com/members/update/${this.state.memberid}`,
+          `http://localhost:5000/members/update/${this.state.memberid}`,
           reminder
         )
         .then(res => console.log(res.data));

@@ -39,7 +39,7 @@ class BookRecords extends Component {
       componentDidMount = async () => {
  
         axios
-          .get("https://library-api123.herokuapp.com/requests/")
+          .get("http://localhost:5000/requests/")
           .then(response => {
             this.setState({ bookrecords: response.data });
           
@@ -52,7 +52,7 @@ class BookRecords extends Component {
       handleOnClick= async (number) => {
        
   
-    const url = `https://library-api123.herokuapp.com/books/`+number;
+    const url = `http://localhost:5000/books/`+number;
             const api_call = await fetch(url);
             const data = await api_call.json();
             
@@ -67,13 +67,13 @@ class BookRecords extends Component {
               
             
             axios
-            .post("https://library-api123.herokuapp.com/requests/add", bookrecord)
+            .post("http://localhost:5000/requests/add", bookrecord)
             .then(res => console.log(res.data));
         }
 
         deleteuserRequest(id) {
          
-          axios.delete("https://library-api123.herokuapp.com/requests/" + id).then(response => {
+          axios.delete("http://localhost:5000/requests/" + id).then(response => {
            
           });
       

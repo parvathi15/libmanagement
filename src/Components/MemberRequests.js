@@ -12,7 +12,7 @@ export default class MemberRequests extends Component {
     }
 
     componentDidMount = async () => {
-        const url = `http://localhost:2500/members/requests/pending`;
+        const url = `http://localhost:5000/members/requests/pending`;
         const api_call = await fetch(url);
         const data = await api_call.json();
         console.log(data);
